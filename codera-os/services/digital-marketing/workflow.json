@@ -1,0 +1,31 @@
+{
+  "service": "digital-marketing",
+  "agent": "Digital Marketing Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Goals & audience",
+      "agent": "Define objectives, KPIs, and target segments."
+    },
+    {
+      "step": 2,
+      "title": "Channel plan",
+      "agent": "Choose channels and budget allocation."
+    },
+    {
+      "step": 3,
+      "title": "Creative & copy",
+      "agent": "Produce ad creative and messaging."
+    },
+    {
+      "step": 4,
+      "title": "Launch & optimize",
+      "agent": "Run campaigns and optimize on performance."
+    },
+    {
+      "step": 5,
+      "title": "Report",
+      "agent": "Monthly performance and ROAS report."
+    }
+  ]
+}

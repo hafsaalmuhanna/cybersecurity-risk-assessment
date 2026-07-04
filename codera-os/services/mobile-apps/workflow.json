@@ -1,0 +1,41 @@
+{
+  "service": "mobile-apps",
+  "agent": "Mobile Apps Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Discovery",
+      "agent": "Clarify platforms, core flows, and target users."
+    },
+    {
+      "step": 2,
+      "title": "Scope & wireframes",
+      "agent": "Define MVP screens and acceptance criteria."
+    },
+    {
+      "step": 3,
+      "title": "Proposal & pricing",
+      "agent": "Estimate by screens, integrations, and platforms."
+    },
+    {
+      "step": 4,
+      "title": "Contract & kickoff",
+      "agent": "Contract, milestones, and store accounts."
+    },
+    {
+      "step": 5,
+      "title": "Build sprints",
+      "agent": "Track two-week sprints and demo checkpoints."
+    },
+    {
+      "step": 6,
+      "title": "QA & store review",
+      "agent": "Device testing and App Store / Play submission."
+    },
+    {
+      "step": 7,
+      "title": "Launch & support",
+      "agent": "Release, monitor crashes, and hand over."
+    }
+  ]
+}

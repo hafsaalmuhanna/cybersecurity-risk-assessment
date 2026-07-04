@@ -1,0 +1,13 @@
+{
+  "id": "automation",
+  "name": "Automation",
+  "nameAr": "الأتمتة",
+  "icon": "⚙️",
+  "color": "#64748b",
+  "tagline": "Workflow automation and system integration.",
+  "unit": "project",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

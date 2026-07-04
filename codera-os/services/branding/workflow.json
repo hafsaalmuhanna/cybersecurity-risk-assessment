@@ -1,0 +1,31 @@
+{
+  "service": "branding",
+  "agent": "Branding Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Brand discovery",
+      "agent": "Interview client on values, audience, and positioning."
+    },
+    {
+      "step": 2,
+      "title": "Strategy",
+      "agent": "Define positioning, voice, and personality."
+    },
+    {
+      "step": 3,
+      "title": "Identity design",
+      "agent": "Logo, color, and typography concepts."
+    },
+    {
+      "step": 4,
+      "title": "Guidelines",
+      "agent": "Produce a brand guidelines document."
+    },
+    {
+      "step": 5,
+      "title": "Handover",
+      "agent": "Deliver assets and usage rules."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "service": "consulting",
+  "agent": "Consulting Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Engagement scoping",
+      "agent": "Define the question and success criteria."
+    },
+    {
+      "step": 2,
+      "title": "Assessment",
+      "agent": "Analyze current state and constraints."
+    },
+    {
+      "step": 3,
+      "title": "Recommendations",
+      "agent": "Deliver a prioritized roadmap."
+    },
+    {
+      "step": 4,
+      "title": "Advisory",
+      "agent": "Ongoing advisory and check-ins."
+    }
+  ]
+}

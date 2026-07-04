@@ -1,0 +1,13 @@
+{
+  "id": "branding",
+  "name": "Branding",
+  "nameAr": "الهوية التجارية",
+  "icon": "✨",
+  "color": "#f59e0b",
+  "tagline": "Brand strategy, identity, and guidelines.",
+  "unit": "project",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

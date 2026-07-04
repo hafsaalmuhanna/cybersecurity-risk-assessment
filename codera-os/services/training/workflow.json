@@ -1,0 +1,26 @@
+{
+  "service": "training",
+  "agent": "Training Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Needs assessment",
+      "agent": "Identify skill gaps and audience level."
+    },
+    {
+      "step": 2,
+      "title": "Curriculum design",
+      "agent": "Build a tailored curriculum and materials."
+    },
+    {
+      "step": 3,
+      "title": "Delivery",
+      "agent": "Run the workshop or course."
+    },
+    {
+      "step": 4,
+      "title": "Assessment",
+      "agent": "Evaluate outcomes and issue certificates."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "training",
+  "name": "Training",
+  "nameAr": "التدريب",
+  "icon": "🎓",
+  "color": "#a855f7",
+  "tagline": "Technical workshops and team upskilling.",
+  "unit": "session",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

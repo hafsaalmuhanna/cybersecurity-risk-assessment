@@ -1,0 +1,13 @@
+{
+  "id": "mobile-apps",
+  "name": "Mobile Apps",
+  "nameAr": "تطبيقات الجوال",
+  "icon": "📱",
+  "color": "#8b5cf6",
+  "tagline": "iOS, Android, and cross-platform applications.",
+  "unit": "project",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

@@ -1,0 +1,46 @@
+{
+  "service": "ai-solutions",
+  "agent": "AI Solutions Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Use-case discovery",
+      "agent": "Identify the highest-ROI AI use case for the client."
+    },
+    {
+      "step": 2,
+      "title": "Data & feasibility",
+      "agent": "Assess data readiness, privacy, and model fit."
+    },
+    {
+      "step": 3,
+      "title": "Solution design",
+      "agent": "Pick architecture: RAG, fine-tune, agent, or workflow."
+    },
+    {
+      "step": 4,
+      "title": "Proposal & pricing",
+      "agent": "Price by build effort plus monthly run cost."
+    },
+    {
+      "step": 5,
+      "title": "Prototype",
+      "agent": "Ship a working proof-of-concept to validate value."
+    },
+    {
+      "step": 6,
+      "title": "Productionize",
+      "agent": "Harden, add guardrails, and connect data sources."
+    },
+    {
+      "step": 7,
+      "title": "Evaluation",
+      "agent": "Measure accuracy, latency, and cost per request."
+    },
+    {
+      "step": 8,
+      "title": "Handover & retainer",
+      "agent": "Deploy, document, and set up a support retainer."
+    }
+  ]
+}

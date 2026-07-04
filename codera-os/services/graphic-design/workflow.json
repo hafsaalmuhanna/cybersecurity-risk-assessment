@@ -1,0 +1,31 @@
+{
+  "service": "graphic-design",
+  "agent": "Graphic Design Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Brief",
+      "agent": "Capture the creative brief and brand assets."
+    },
+    {
+      "step": 2,
+      "title": "Concepts",
+      "agent": "Produce concept directions for review."
+    },
+    {
+      "step": 3,
+      "title": "Design",
+      "agent": "Execute approved concept across deliverables."
+    },
+    {
+      "step": 4,
+      "title": "Revisions",
+      "agent": "Apply feedback within the agreed rounds."
+    },
+    {
+      "step": 5,
+      "title": "Delivery",
+      "agent": "Export final files in required formats."
+    }
+  ]
+}

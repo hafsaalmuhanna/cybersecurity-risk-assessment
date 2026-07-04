@@ -1,0 +1,13 @@
+{
+  "id": "ui-ux",
+  "name": "UI/UX",
+  "nameAr": "تصميم واجهات وتجربة المستخدم",
+  "icon": "🧩",
+  "color": "#14b8a6",
+  "tagline": "Product design, wireframes, and prototypes.",
+  "unit": "project",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

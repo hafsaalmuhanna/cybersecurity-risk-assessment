@@ -1,0 +1,16 @@
+{
+  "name": "codera-ai-os",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Service-based AI operating system for Codera (Kuwait Coder). Each service is a self-contained folder that auto-registers into a smart dashboard.",
+  "type": "module",
+  "scripts": {
+    "seed": "node scripts/seed.mjs",
+    "build": "node scripts/build.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "serve": "http-server -p 8080 -c-1 .",
+    "start": "npm run build && npm run serve"
+  },
+  "keywords": ["codera", "dashboard", "ai-os", "kuwait-coder"],
+  "license": "MIT"
+}

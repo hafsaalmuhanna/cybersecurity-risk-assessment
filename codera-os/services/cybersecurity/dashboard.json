@@ -1,0 +1,15 @@
+{
+  "service": "cybersecurity",
+  "kpis": [
+    "active_projects",
+    "completion",
+    "revenue",
+    "clients",
+    "open_tasks"
+  ],
+  "panels": [
+    "projects",
+    "workflow",
+    "recent_activity"
+  ]
+}

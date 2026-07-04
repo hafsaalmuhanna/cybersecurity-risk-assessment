@@ -1,0 +1,13 @@
+{
+  "id": "cybersecurity",
+  "name": "Cybersecurity",
+  "nameAr": "الأمن السيبراني",
+  "icon": "🔒",
+  "color": "#ef4444",
+  "tagline": "Risk assessments, pen testing, and compliance.",
+  "unit": "engagement",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

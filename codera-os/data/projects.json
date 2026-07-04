@@ -1,0 +1,40 @@
+[
+  { "id": "p1", "name": "Corporate website revamp", "service": "website-development", "client": "c1", "status": "in_progress", "completion": 65, "value": 950, "step": 8, "due": "2026-07-20" },
+  { "id": "p2", "name": "E-commerce store", "service": "website-development", "client": "c5", "status": "in_progress", "completion": 40, "value": 3200, "step": 6, "due": "2026-08-15" },
+  { "id": "p3", "name": "Booking portal", "service": "website-development", "client": "c7", "status": "in_progress", "completion": 25, "value": 2100, "step": 5, "due": "2026-09-01" },
+  { "id": "p4", "name": "Landing page", "service": "website-development", "client": "c9", "status": "review", "completion": 90, "value": 380, "step": 9, "due": "2026-07-10" },
+  { "id": "p5", "name": "Company profile site", "service": "website-development", "client": "c4", "status": "in_progress", "completion": 55, "value": 800, "step": 7, "due": "2026-07-28" },
+
+  { "id": "p6", "name": "Delivery driver app", "service": "mobile-apps", "client": "c2", "status": "in_progress", "completion": 45, "value": 6800, "step": 5, "due": "2026-09-30" },
+  { "id": "p7", "name": "Loyalty app", "service": "mobile-apps", "client": "c9", "status": "in_progress", "completion": 20, "value": 3400, "step": 4, "due": "2026-10-15" },
+
+  { "id": "p8", "name": "Support chatbot (RAG)", "service": "ai-solutions", "client": "c3", "status": "in_progress", "completion": 70, "value": 4200, "step": 6, "due": "2026-07-25" },
+  { "id": "p9", "name": "Sales lead-scoring agent", "service": "ai-solutions", "client": "c6", "status": "in_progress", "completion": 35, "value": 5500, "step": 5, "due": "2026-08-30" },
+  { "id": "p10", "name": "Document Q&A assistant", "service": "ai-solutions", "client": "c8", "status": "review", "completion": 85, "value": 3000, "step": 7, "due": "2026-07-12" },
+
+  { "id": "p11", "name": "Security risk assessment", "service": "cybersecurity", "client": "c6", "status": "in_progress", "completion": 60, "value": 1800, "step": 4, "due": "2026-07-18" },
+  { "id": "p12", "name": "Web app penetration test", "service": "cybersecurity", "client": "c3", "status": "in_progress", "completion": 30, "value": 2600, "step": 3, "due": "2026-08-05" },
+  { "id": "p13", "name": "NIST readiness review", "service": "cybersecurity", "client": "c2", "status": "planning", "completion": 10, "value": 3200, "step": 1, "due": "2026-09-10" },
+
+  { "id": "p14", "name": "Monthly SEO retainer", "service": "seo", "client": "c1", "status": "in_progress", "completion": 50, "value": 600, "step": 4, "due": "2026-07-31" },
+  { "id": "p15", "name": "SEO audit + content plan", "service": "seo", "client": "c10", "status": "in_progress", "completion": 40, "value": 500, "step": 3, "due": "2026-07-22" },
+  { "id": "p16", "name": "E-commerce SEO", "service": "seo", "client": "c5", "status": "in_progress", "completion": 30, "value": 900, "step": 3, "due": "2026-08-20" },
+
+  { "id": "p17", "name": "Brand identity", "service": "branding", "client": "c11", "status": "in_progress", "completion": 55, "value": 1400, "step": 3, "due": "2026-07-26" },
+  { "id": "p18", "name": "Rebrand", "service": "branding", "client": "c12", "status": "planning", "completion": 15, "value": 2000, "step": 1, "due": "2026-09-05" },
+
+  { "id": "p19", "name": "Social media designs", "service": "graphic-design", "client": "c9", "status": "in_progress", "completion": 60, "value": 250, "step": 3, "due": "2026-07-31" },
+  { "id": "p20", "name": "Campaign creative", "service": "graphic-design", "client": "c10", "status": "in_progress", "completion": 50, "value": 300, "step": 3, "due": "2026-07-31" },
+
+  { "id": "p21", "name": "App product design", "service": "ui-ux", "client": "c2", "status": "in_progress", "completion": 45, "value": 2800, "step": 3, "due": "2026-08-12" },
+  { "id": "p22", "name": "Dashboard UX audit", "service": "ui-ux", "client": "c6", "status": "review", "completion": 80, "value": 500, "step": 4, "due": "2026-07-14" },
+
+  { "id": "p23", "name": "Paid ads management", "service": "digital-marketing", "client": "c7", "status": "in_progress", "completion": 50, "value": 900, "step": 4, "due": "2026-07-31" },
+  { "id": "p24", "name": "Launch campaign", "service": "digital-marketing", "client": "c12", "status": "in_progress", "completion": 35, "value": 1200, "step": 4, "due": "2026-08-01" },
+
+  { "id": "p25", "name": "Invoice automation", "service": "automation", "client": "c4", "status": "in_progress", "completion": 40, "value": 1100, "step": 3, "due": "2026-08-08" },
+
+  { "id": "p26", "name": "AI for teams workshop", "service": "training", "client": "c8", "status": "planning", "completion": 20, "value": 450, "step": 1, "due": "2026-07-29" },
+
+  { "id": "p27", "name": "Tech strategy advisory", "service": "consulting", "client": "c6", "status": "in_progress", "completion": 50, "value": 2000, "step": 3, "due": "2026-08-25" }
+]

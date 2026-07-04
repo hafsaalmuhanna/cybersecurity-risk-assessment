@@ -1,0 +1,13 @@
+{
+  "id": "graphic-design",
+  "name": "Graphic Design",
+  "nameAr": "التصميم الجرافيكي",
+  "icon": "🎨",
+  "color": "#ec4899",
+  "tagline": "Social, print, and marketing creative.",
+  "unit": "retainer",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

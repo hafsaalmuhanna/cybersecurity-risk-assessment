@@ -1,0 +1,12 @@
+[
+  { "id": "l1", "name": "Yousef Trading", "service": "website-development", "value": 1200, "stage": "quote_sent", "date": "2026-07-03" },
+  { "id": "l2", "name": "Areej Boutique", "service": "graphic-design", "value": 250, "stage": "new", "date": "2026-07-04" },
+  { "id": "l3", "name": "Kuwait Motors", "service": "ai-solutions", "value": 5000, "stage": "qualified", "date": "2026-07-02" },
+  { "id": "l4", "name": "Salmiya Dental", "service": "seo", "value": 600, "stage": "quote_sent", "date": "2026-07-03" },
+  { "id": "l5", "name": "Green Farms", "service": "mobile-apps", "value": 4500, "stage": "new", "date": "2026-07-04" },
+  { "id": "l6", "name": "Hala Events", "service": "digital-marketing", "value": 900, "stage": "qualified", "date": "2026-07-01" },
+  { "id": "l7", "name": "Bayan Law Firm", "service": "cybersecurity", "value": 1800, "stage": "quote_sent", "date": "2026-07-02" },
+  { "id": "l8", "name": "Tarek Auto", "service": "branding", "value": 1400, "stage": "new", "date": "2026-07-04" },
+  { "id": "l9", "name": "Cloud Grocers", "service": "automation", "value": 1100, "stage": "qualified", "date": "2026-07-03" },
+  { "id": "l10", "name": "Nadia Interiors", "service": "ui-ux", "value": 2000, "stage": "new", "date": "2026-07-04" }
+]

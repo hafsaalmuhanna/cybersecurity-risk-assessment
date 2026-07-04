@@ -1,0 +1,31 @@
+{
+  "service": "ui-ux",
+  "agent": "UI/UX Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Research",
+      "agent": "Understand users, tasks, and pain points."
+    },
+    {
+      "step": 2,
+      "title": "Information architecture",
+      "agent": "Structure flows and navigation."
+    },
+    {
+      "step": 3,
+      "title": "Wireframes",
+      "agent": "Low-fidelity layouts for validation."
+    },
+    {
+      "step": 4,
+      "title": "UI design",
+      "agent": "High-fidelity screens and design system."
+    },
+    {
+      "step": 5,
+      "title": "Prototype & handoff",
+      "agent": "Interactive prototype and dev handoff."
+    }
+  ]
+}

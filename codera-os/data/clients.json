@@ -1,0 +1,14 @@
+[
+  { "id": "c1", "name": "Al-Salam Group", "sector": "Retail", "since": "2024-02", "status": "active" },
+  { "id": "c2", "name": "Gulf Logistics", "sector": "Logistics", "since": "2024-05", "status": "active" },
+  { "id": "c3", "name": "Kuwait Health Clinics", "sector": "Healthcare", "since": "2024-08", "status": "active" },
+  { "id": "c4", "name": "Diwan Real Estate", "sector": "Real Estate", "since": "2024-09", "status": "active" },
+  { "id": "c5", "name": "Baytak Furniture", "sector": "Retail", "since": "2024-11", "status": "active" },
+  { "id": "c6", "name": "Falcon Fintech", "sector": "Finance", "since": "2025-01", "status": "active" },
+  { "id": "c7", "name": "Nomad Travel", "sector": "Travel", "since": "2025-02", "status": "active" },
+  { "id": "c8", "name": "EduSpark Academy", "sector": "Education", "since": "2025-03", "status": "active" },
+  { "id": "c9", "name": "Marina Cafe", "sector": "F&B", "since": "2025-03", "status": "active" },
+  { "id": "c10", "name": "Sadu Fashion", "sector": "Fashion", "since": "2025-04", "status": "active" },
+  { "id": "c11", "name": "Qadsia Sports", "sector": "Sports", "since": "2025-04", "status": "prospect" },
+  { "id": "c12", "name": "Boubyan Media", "sector": "Media", "since": "2025-05", "status": "active" }
+]

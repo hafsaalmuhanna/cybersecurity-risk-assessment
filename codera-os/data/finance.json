@@ -1,0 +1,19 @@
+{
+  "currency": "KWD",
+  "monthly_revenue": [
+    { "month": "2026-01", "revenue": 14200 },
+    { "month": "2026-02", "revenue": 16800 },
+    { "month": "2026-03", "revenue": 15400 },
+    { "month": "2026-04", "revenue": 19100 },
+    { "month": "2026-05", "revenue": 21600 },
+    { "month": "2026-06", "revenue": 24300 }
+  ],
+  "invoices": [
+    { "id": "inv1", "client": "c1", "amount": 475, "status": "due", "due": "2026-07-10" },
+    { "id": "inv2", "client": "c3", "amount": 2100, "status": "due", "due": "2026-07-12" },
+    { "id": "inv3", "client": "c6", "amount": 900, "status": "due", "due": "2026-07-15" },
+    { "id": "inv4", "client": "c8", "amount": 1500, "status": "due", "due": "2026-07-09" },
+    { "id": "inv5", "client": "c2", "amount": 3400, "status": "due", "due": "2026-07-18" },
+    { "id": "inv6", "client": "c5", "amount": 1600, "status": "paid", "due": "2026-06-28" }
+  ]
+}

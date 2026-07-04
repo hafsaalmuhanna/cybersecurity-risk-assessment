@@ -1,0 +1,13 @@
+{
+  "id": "seo",
+  "name": "SEO",
+  "nameAr": "تحسين محركات البحث",
+  "icon": "📈",
+  "color": "#22c55e",
+  "tagline": "Search visibility, content, and technical SEO.",
+  "unit": "retainer",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

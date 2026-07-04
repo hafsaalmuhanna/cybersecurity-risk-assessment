@@ -1,0 +1,13 @@
+{
+  "id": "ai-solutions",
+  "name": "AI Solutions",
+  "nameAr": "حلول الذكاء الاصطناعي",
+  "icon": "🤖",
+  "color": "#06b6d4",
+  "tagline": "Chatbots, RAG systems, agents, and automation.",
+  "unit": "project",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

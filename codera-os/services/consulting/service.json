@@ -1,0 +1,13 @@
+{
+  "id": "consulting",
+  "name": "Consulting",
+  "nameAr": "الاستشارات",
+  "icon": "💼",
+  "color": "#0ea5e9",
+  "tagline": "Technology strategy and advisory.",
+  "unit": "retainer",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

@@ -1,0 +1,36 @@
+{
+  "service": "seo",
+  "agent": "SEO Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Keyword research",
+      "agent": "Find high-intent keywords and cluster by topic."
+    },
+    {
+      "step": 2,
+      "title": "Competitor analysis",
+      "agent": "Benchmark competitors' rankings and gaps."
+    },
+    {
+      "step": 3,
+      "title": "Content plan",
+      "agent": "Build a monthly content calendar from clusters."
+    },
+    {
+      "step": 4,
+      "title": "Article production",
+      "agent": "Write and optimize articles for target keywords."
+    },
+    {
+      "step": 5,
+      "title": "Measurement",
+      "agent": "Track rankings, traffic, and conversions."
+    },
+    {
+      "step": 6,
+      "title": "Monthly report",
+      "agent": "Deliver a monthly performance + next-steps report."
+    }
+  ]
+}

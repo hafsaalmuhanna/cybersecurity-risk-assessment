@@ -1,0 +1,13 @@
+{
+  "id": "digital-marketing",
+  "name": "Digital Marketing",
+  "nameAr": "التسويق الرقمي",
+  "icon": "📣",
+  "color": "#f97316",
+  "tagline": "Paid ads, social, and campaign management.",
+  "unit": "retainer",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

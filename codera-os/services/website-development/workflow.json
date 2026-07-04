@@ -1,0 +1,56 @@
+{
+  "service": "website-development",
+  "agent": "Website Development Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Client intake",
+      "agent": "Capture brief, industry, goals, budget band."
+    },
+    {
+      "step": 2,
+      "title": "Requirements analysis",
+      "agent": "Turn brief into a scoped feature list + sitemap."
+    },
+    {
+      "step": 3,
+      "title": "Proposal",
+      "agent": "Draft a proposal with scope, timeline, and deliverables."
+    },
+    {
+      "step": 4,
+      "title": "Pricing",
+      "agent": "Compute price from scope, pages, and integrations."
+    },
+    {
+      "step": 5,
+      "title": "Contract",
+      "agent": "Generate contract + milestones from the accepted proposal."
+    },
+    {
+      "step": 6,
+      "title": "Project setup",
+      "agent": "Create the project, repo, and staging environment."
+    },
+    {
+      "step": 7,
+      "title": "Task breakdown",
+      "agent": "Split into design, front-end, back-end, and QA tasks."
+    },
+    {
+      "step": 8,
+      "title": "Execution tracking",
+      "agent": "Monitor progress and flag blocked or overdue tasks."
+    },
+    {
+      "step": 9,
+      "title": "Quality assurance",
+      "agent": "Run the QA checklist: responsive, a11y, performance."
+    },
+    {
+      "step": 10,
+      "title": "Delivery",
+      "agent": "Handover, training, and warranty window."
+    }
+  ]
+}

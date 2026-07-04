@@ -1,0 +1,41 @@
+{
+  "service": "cybersecurity",
+  "agent": "Cybersecurity Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Scoping",
+      "agent": "Define assets, environments, and rules of engagement."
+    },
+    {
+      "step": 2,
+      "title": "Asset & threat mapping",
+      "agent": "Inventory assets and map threats (NIST CSF Identify)."
+    },
+    {
+      "step": 3,
+      "title": "Assessment / testing",
+      "agent": "Run the assessment or authorized penetration test."
+    },
+    {
+      "step": 4,
+      "title": "Risk scoring",
+      "agent": "Score findings by likelihood × impact."
+    },
+    {
+      "step": 5,
+      "title": "Report",
+      "agent": "Produce an executive + technical remediation report."
+    },
+    {
+      "step": 6,
+      "title": "Remediation support",
+      "agent": "Advise fixes and track closure of findings."
+    },
+    {
+      "step": 7,
+      "title": "Re-test",
+      "agent": "Verify remediation and issue a clearance summary."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "website-development",
+  "name": "Website Development",
+  "nameAr": "تطوير المواقع",
+  "icon": "🌐",
+  "color": "#3b82f6",
+  "tagline": "Corporate sites, e-commerce, and web platforms.",
+  "unit": "project",
+  "pricingRef": "pricing.md",
+  "workflowRef": "workflow.json",
+  "dashboardRef": "dashboard.json",
+  "agentRef": "agent.md"
+}

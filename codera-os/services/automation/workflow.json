@@ -1,0 +1,31 @@
+{
+  "service": "automation",
+  "agent": "Automation Agent",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Process mapping",
+      "agent": "Map the manual process to be automated."
+    },
+    {
+      "step": 2,
+      "title": "Opportunity analysis",
+      "agent": "Quantify time saved and error reduction."
+    },
+    {
+      "step": 3,
+      "title": "Build",
+      "agent": "Implement the automation and integrations."
+    },
+    {
+      "step": 4,
+      "title": "Test",
+      "agent": "Validate edge cases and failure handling."
+    },
+    {
+      "step": 5,
+      "title": "Deploy & monitor",
+      "agent": "Roll out and monitor reliability."
+    }
+  ]
+}
