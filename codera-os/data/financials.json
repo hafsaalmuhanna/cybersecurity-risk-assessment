@@ -1,0 +1,16 @@
+{
+  "currency": "KWD",
+  "period": "Year 1 · Jun 2025 – Jun 2026",
+  "periodAr": "السنة الأولى · يونيو ٢٠٢٥ – يونيو ٢٠٢٦",
+  "is_real": true,
+  "revenue": [
+    { "label": "Consulting & workshops", "labelAr": "استشارات وورش عمل", "amount": 90, "note": "Most delivered free as marketing; paid work minimal.", "noteAr": "أغلبها مجاني للتسويق؛ المدفوع بسيط." }
+  ],
+  "founder_salary": {
+    "monthly": 300,
+    "months_elapsed": 12,
+    "months_paid": 0,
+    "note": "Intended owner salary of 300/mo, unpaid because there is no income.",
+    "noteAr": "راتب المالك المفترض 300 شهرياً، غير مسحوب لعدم وجود دخل."
+  }
+}

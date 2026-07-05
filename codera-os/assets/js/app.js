@@ -38,6 +38,15 @@
       expenses: "Expenses", ownerInvestment: "Owner Investment", startupCosts: "Startup costs (one-time)",
       monthlyRecurring: "Monthly recurring", category: "Category", item: "Item", type: "Type",
       investedSoFar: "Invested so far", oneTime: "one-time", monthly: "monthly", byCategory: "By category", rentPaid: "Rent paid",
+      financials: "Financial Report", incomeStatement: "Income statement (P&L)", breakEven: "Break-even & runway",
+      ownerLedger: "What the business owes you", revenueYr: "Revenue (Year 1)", netCash: "Net cash result",
+      salaryOwed: "Salary owed to you", totalRevenue: "Total revenue", operatingExpenses: "Operating expenses",
+      operatingResult: "Operating result", startupCapital: "Startup / capital (one-time)", netCashResult: "Net cash result (Year 1)",
+      founderSalaryAccrued: "Founder salary (accrued, unpaid)", economicResult: "Economic result incl. your labour",
+      capitalInvested: "Capital invested (cash)", deferredSalary: "Deferred salary", owedTotal: "Total owed to owner",
+      toStopLosing: "To stop losing cash (rent only)", toCoverAndPay: "To cover costs + pay yourself 300",
+      capitalToRecover: "Capital still to recover", perMonth: "/mo", realData: "Real figures you provided",
+      disclaimer: "Summary of the numbers you gave — not accounting or tax advice.",
       expensesNote: "Paid by the owner from a personal account. Recurring rent counts",
     },
     ar: {
@@ -63,6 +72,15 @@
       expenses: "المصاريف", ownerInvestment: "استثمار المالك", startupCosts: "مصاريف تأسيسية (مرة واحدة)",
       monthlyRecurring: "مصاريف شهرية متكررة", category: "الفئة", item: "البند", type: "النوع",
       investedSoFar: "المدفوع حتى الآن", oneTime: "مرة واحدة", monthly: "شهري", byCategory: "حسب الفئة", rentPaid: "إجمالي الإيجار",
+      financials: "التقرير المالي", incomeStatement: "قائمة الدخل (الأرباح والخسائر)", breakEven: "نقطة التعادل والاستمرارية",
+      ownerLedger: "ما تدين به الشركة لكِ", revenueYr: "الإيرادات (السنة الأولى)", netCash: "صافي النتيجة النقدية",
+      salaryOwed: "راتب مستحق لكِ", totalRevenue: "إجمالي الإيرادات", operatingExpenses: "مصاريف تشغيلية",
+      operatingResult: "النتيجة التشغيلية", startupCapital: "تأسيس / رأسمالي (مرة واحدة)", netCashResult: "صافي النتيجة النقدية (السنة الأولى)",
+      founderSalaryAccrued: "راتب المالك (مستحق وغير مدفوع)", economicResult: "النتيجة الاقتصادية شاملة جهدك",
+      capitalInvested: "رأس المال المدفوع (نقداً)", deferredSalary: "راتب مؤجل", owedTotal: "إجمالي المستحق للمالك",
+      toStopLosing: "لوقف الخسارة النقدية (إيجار فقط)", toCoverAndPay: "لتغطية التكاليف + راتبك ٣٠٠",
+      capitalToRecover: "رأس المال المتبقي استرجاعه", perMonth: "/شهر", realData: "أرقامك الحقيقية",
+      disclaimer: "ملخص للأرقام التي قدمتِها — ليس استشارة محاسبية أو ضريبية.",
       expensesNote: "مدفوعة من المالك من الحساب الشخصي. الإيجار المتكرر محسوب لـ",
     },
   };
@@ -465,6 +483,74 @@
     return `<div class="section-title">${t("runbook")}</div><div class="grid" style="gap:14px">${cards}</div>`;
   }
 
+  function viewFinancials() {
+    const f = DB.financials;
+    if (!f) return `<div class="empty">No financials.json found.</div>`;
+    const r = f.report;
+    const neg = (n) => (n < 0 ? ' style="color:var(--bad)"' : n > 0 ? ' style="color:var(--good)"' : "");
+    const signed = (n) => (n < 0 ? "−" + money(-n) : money(n));
+    const period = lang === "ar" ? f.periodAr : f.period;
+
+    const revRows = f.revenue
+      .map((i) => `<tr><td style="padding-left:26px">${esc(lang === "ar" && i.labelAr ? i.labelAr : i.label)}<div style="color:var(--muted-2);font-size:11px">${esc(lang === "ar" ? i.noteAr : i.note)}</div></td><td style="text-align:right">${money(i.amount)}</td></tr>`)
+      .join("");
+
+    // Income statement rows: [label, amount, {bold, indent, total}]
+    const row = (label, amount, o = {}) =>
+      `<tr${o.total ? ' style="border-top:1px solid var(--border-2)"' : ""}>
+        <td style="${o.indent ? "padding-left:26px;" : ""}${o.bold ? "font-weight:700;" : ""}">${label}</td>
+        <td style="text-align:right;${o.bold ? "font-weight:700;" : ""}"${o.color ? neg(amount) : ""}>${o.signed ? signed(amount) : money(amount)}</td>
+      </tr>`;
+
+    const pl = `<div class="table-wrap"><table><tbody>
+      <tr><td style="font-weight:700;color:var(--muted)">${t("totalRevenue")}</td><td></td></tr>
+      ${revRows}
+      ${row(t("totalRevenue"), r.revenue, { bold: true, total: true })}
+      <tr><td colspan="2" style="height:8px"></td></tr>
+      <tr><td style="font-weight:700;color:var(--muted)">${t("operatingExpenses")}</td><td></td></tr>
+      ${row("↳ " + t("rentPaid") + " (12 " + t("perMonth").replace("/", "") + ")", -r.opexRecurring, { indent: true, signed: true, color: true })}
+      ${row(t("operatingResult"), r.operatingResult, { bold: true, total: true, signed: true, color: true })}
+      <tr><td colspan="2" style="height:8px"></td></tr>
+      ${row("↳ " + t("startupCapital"), -r.startupCapital, { indent: true, signed: true, color: true })}
+      ${row(t("netCashResult"), r.cashResult, { bold: true, total: true, signed: true, color: true })}
+      <tr><td colspan="2" style="height:8px"></td></tr>
+      ${row("↳ " + t("founderSalaryAccrued"), -r.salaryOwed, { indent: true, signed: true, color: true })}
+      ${row(t("economicResult"), r.economicResult, { bold: true, total: true, signed: true, color: true })}
+    </tbody></table></div>`;
+
+    const breakeven = `<div class="md-body">
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)"><span>${t("toStopLosing")}</span><strong>${money(r.breakEvenNoSalary)} ${t("perMonth")}</strong></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)"><span>${t("toCoverAndPay")}</span><strong style="color:var(--warn)">${money(r.breakEvenMonthly)} ${t("perMonth")}</strong></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 0"><span>${t("capitalToRecover")}</span><strong style="color:var(--bad)">${money(r.cashInvested)}</strong></div>
+      <p style="color:var(--muted-2);font-size:12px;margin-top:12px">${lang === "ar" ? "الدخل الحالي 90 د.ك في السنة ≈ 7.5 د.ك شهرياً، أي أقل من 3% من نقطة التعادل التشغيلية (280 د.ك/شهر)." : "Current income of KD 90/yr ≈ KD 7.5/mo — under 3% of the operating break-even (KD 280/mo)."}</p>
+    </div>`;
+
+    const ledger = `<div class="md-body">
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)"><span>${t("capitalInvested")}</span><strong>${money(r.cashInvested)}</strong></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)"><span>${t("deferredSalary")} (300 × 12)</span><strong>${money(r.salaryOwed)}</strong></div>
+      <div style="display:flex;justify-content:space-between;padding:11px 0"><span style="font-weight:700">${t("owedTotal")}</span><strong style="color:var(--accent-2);font-size:16px">${money(r.owedToOwner)}</strong></div>
+    </div>`;
+
+    return `
+      <div class="kpi-row">
+        ${kpi(t("revenueYr"), money(r.revenue), { glow: "rgba(34,197,94,0.25)" })}
+        ${kpi(t("investedSoFar"), money(r.cashInvested), { glow: "rgba(139,92,246,0.3)" })}
+        ${kpi(t("netCash"), signed(r.cashResult), { glow: "rgba(239,68,68,0.35)" })}
+        ${kpi(t("salaryOwed"), money(r.salaryOwed), { glow: "rgba(245,158,11,0.3)" })}
+      </div>
+      <div class="grid cols-2">
+        <div class="panel">
+          <h3>${t("incomeStatement")} <span style="color:var(--muted-2);font-weight:400;font-size:12px">· ${esc(period)}</span></h3>
+          ${pl}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="panel"><h3>${t("breakEven")}</h3>${breakeven}</div>
+          <div class="panel"><h3>${t("ownerLedger")}</h3>${ledger}</div>
+        </div>
+      </div>
+      <div class="gen-note">${t("disclaimer")}</div>`;
+  }
+
   function viewExpenses() {
     const e = DB.expenses;
     const label = (i) => (lang === "ar" && i.labelAr ? i.labelAr : i.label);
@@ -553,6 +639,7 @@ $ npm run build   →  registered automatically</pre></div>`;
     "dashboard/executive": { title: () => t("executive"), crumb: () => t("dashboards"), render: viewExecutive },
     "dashboard/sales": { title: () => t("sales"), crumb: () => t("dashboards"), render: viewSales },
     "dashboard/finance": { title: () => t("finance"), crumb: () => t("dashboards"), render: viewFinance },
+    financials: { title: () => t("financials"), crumb: () => t("finance"), render: viewFinancials },
     expenses: { title: () => t("expenses"), crumb: () => t("finance"), render: viewExpenses },
     "dashboard/operations": { title: () => t("operations"), crumb: () => t("dashboards"), render: viewOperations },
     clients: { title: () => t("clients"), crumb: () => t("workspace"), render: viewClients },
@@ -608,6 +695,7 @@ $ npm run build   →  registered automatically</pre></div>`;
       ${item("dashboard/executive", "📊", t("executive"))}
       ${item("dashboard/sales", "💰", t("sales"))}
       ${item("dashboard/finance", "🧾", t("finance"))}
+      ${item("financials", "📑", t("financials"))}
       ${item("expenses", "🧮", t("expenses"))}
       ${item("dashboard/operations", "🛠️", t("operations"))}
       <div class="nav-group-label">${t("services")}</div>

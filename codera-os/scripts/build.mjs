@@ -82,6 +82,9 @@ const data = {
   expenses: existsSync(join(DATA, "expenses.json"))
     ? readJSON(join(DATA, "expenses.json"))
     : { currency: "KWD", months_rent_paid: 0, items: [] },
+  financials: existsSync(join(DATA, "financials.json"))
+    ? readJSON(join(DATA, "financials.json"))
+    : null,
 };
 
 // Pre-compute the owner's total personal outlay so the UI stays simple.
@@ -102,6 +105,34 @@ const data = {
     rentOneTime,
     rentTotalPaid: rentOneTime + recurringPaid, // first month + all monthly payments
     investedSoFar: oneTime + recurringPaid,
+  };
+}
+
+// Year-1 income statement from real figures (owner-funded, no external capital).
+if (data.financials) {
+  const f = data.financials;
+  const et = data.expenses.totals;
+  const revenue = f.revenue.reduce((a, r) => a + r.amount, 0);
+  const sal = f.founder_salary || { monthly: 0, months_elapsed: 0, months_paid: 0 };
+  const salaryOwed = sal.monthly * (sal.months_elapsed - sal.months_paid);
+  const opexRecurring = et.rentTotalPaid; // rent for the year (only recurring opex so far)
+  const startupCapital = et.oneTime - et.rentOneTime; // non-rent one-time outlay
+  const cashInvested = et.investedSoFar; // total cash the owner put in
+  f.report = {
+    currency: f.currency,
+    revenue,
+    opexRecurring,
+    startupCapital,
+    cashInvested,
+    salaryMonthly: sal.monthly,
+    salaryOwed,
+    cashResult: revenue - cashInvested, // pure out-of-pocket position
+    operatingResult: revenue - opexRecurring, // ignoring one-time capital
+    economicResult: revenue - cashInvested - salaryOwed, // incl. unpaid labour
+    monthlyBurn: et.monthly + sal.monthly, // rent + intended salary, per month
+    breakEvenMonthly: et.monthly + sal.monthly,
+    breakEvenNoSalary: et.monthly,
+    owedToOwner: cashInvested + salaryOwed, // capital + deferred salary
   };
 }
 
