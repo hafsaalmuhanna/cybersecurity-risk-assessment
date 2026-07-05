@@ -1,0 +1,17 @@
+{
+  "currency": "KWD",
+  "note": "Startup costs paid by the owner from a personal account. months_paid controls how many recurring rent payments are counted in the owner-investment total.",
+  "months_rent_paid": 0,
+  "items": [
+    { "id": "e1", "label": "Larais app", "labelAr": "تطبيق لاريز", "amount": 6000, "category": "Software", "type": "one_time" },
+    { "id": "e2", "label": "Payment gateway", "labelAr": "بوابة الدفع", "amount": 1000, "category": "Software", "type": "one_time" },
+    { "id": "e3", "label": "Office furniture", "labelAr": "أثاث المكتب", "amount": 500, "category": "Office", "type": "one_time" },
+    { "id": "e4", "label": "Rent — first payment", "labelAr": "الإيجار (أول دفعة)", "amount": 580, "category": "Rent", "type": "one_time" },
+    { "id": "e5", "label": "Trademark registration", "labelAr": "تسجيل علامة تجارية", "amount": 300, "category": "Legal", "type": "one_time" },
+    { "id": "e6", "label": "Representative (mandoub)", "labelAr": "المندوب", "amount": 200, "category": "Government", "type": "one_time" },
+    { "id": "e7", "label": "Initial license", "labelAr": "الترخيص المبدئي", "amount": 200, "category": "Government", "type": "one_time" },
+    { "id": "e8", "label": "Government fees (licenses & extract)", "labelAr": "رسوم حكومية (تراخيص ومستخرج)", "amount": 200, "category": "Government", "type": "one_time" },
+    { "id": "e9", "label": "Bank fees — company account", "labelAr": "رسوم بنكية (حساب الشركة)", "amount": 100, "category": "Banking", "type": "one_time" },
+    { "id": "e10", "label": "Rent — monthly", "labelAr": "الإيجار الشهري", "amount": 280, "category": "Rent", "type": "monthly" }
+  ]
+}

@@ -79,7 +79,24 @@ const data = {
   projects: readJSON(join(DATA, "projects.json")),
   leads: readJSON(join(DATA, "leads.json")),
   finance: readJSON(join(DATA, "finance.json")),
+  expenses: existsSync(join(DATA, "expenses.json"))
+    ? readJSON(join(DATA, "expenses.json"))
+    : { currency: "KWD", months_rent_paid: 0, items: [] },
 };
+
+// Pre-compute the owner's total personal outlay so the UI stays simple.
+{
+  const e = data.expenses;
+  const oneTime = e.items.filter((i) => i.type === "one_time").reduce((a, i) => a + i.amount, 0);
+  const monthly = e.items.filter((i) => i.type === "monthly").reduce((a, i) => a + i.amount, 0);
+  const months = e.months_rent_paid || 0;
+  e.totals = {
+    oneTime,
+    monthly,
+    recurringPaid: monthly * months,
+    investedSoFar: oneTime + monthly * months,
+  };
+}
 
 const bundle = {
   generatedAt: new Date().toISOString(),

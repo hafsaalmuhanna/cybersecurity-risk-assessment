@@ -35,6 +35,10 @@
       teamLoad: "Delivery load", overdue: "Due within 10 days", agentPipeline: "Service agents",
       runbook: "Automation runbook", steps: "steps", addServiceTitle: "Adding a service",
       addService: "Every service is a folder under services/. Add one (or run the seeder) and rebuild — it appears here automatically with its own dashboard, agent, workflow and pricing.",
+      expenses: "Expenses", ownerInvestment: "Owner Investment", startupCosts: "Startup costs (one-time)",
+      monthlyRecurring: "Monthly recurring", category: "Category", item: "Item", type: "Type",
+      investedSoFar: "Invested so far", oneTime: "one-time", monthly: "monthly", byCategory: "By category",
+      expensesNote: "Paid by the owner from a personal account. Recurring rent counts",
     },
     ar: {
       overview: "نظرة عامة", executive: "لوحة الإدارة", sales: "لوحة المبيعات",
@@ -56,6 +60,10 @@
       teamLoad: "حِمل التنفيذ", overdue: "مستحق خلال ١٠ أيام", agentPipeline: "وكلاء الخدمات",
       runbook: "دليل الأتمتة", steps: "خطوات", addServiceTitle: "إضافة خدمة",
       addService: "كل خدمة هي مجلد داخل services/. أضِف مجلداً (أو شغّل السكربت) ثم أعد البناء — تظهر هنا تلقائياً بلوحتها ووكيلها وسير عملها وتسعيرها.",
+      expenses: "المصاريف", ownerInvestment: "استثمار المالك", startupCosts: "مصاريف تأسيسية (مرة واحدة)",
+      monthlyRecurring: "مصاريف شهرية متكررة", category: "الفئة", item: "البند", type: "النوع",
+      investedSoFar: "المدفوع حتى الآن", oneTime: "مرة واحدة", monthly: "شهري", byCategory: "حسب الفئة",
+      expensesNote: "مدفوعة من المالك من الحساب الشخصي. الإيجار المتكرر محسوب لـ",
     },
   };
   const t = (k) => (T[lang] && T[lang][k]) || T.en[k] || k;
@@ -385,8 +393,9 @@
         ${kpi(t("revenue"), money(k.revenue), { glow: "rgba(34,211,238,0.3)", delta: k.revenueDelta })}
         ${kpi(t("invoicesDue"), money(due), { glow: "rgba(239,68,68,0.3)" })}
         ${kpi("Collected", money(paid), { glow: "rgba(34,197,94,0.3)" })}
-        ${kpi("Booked (all projects)", money(DB.projects.reduce((a, p) => a + p.value, 0)), { glow: "rgba(79,140,255,0.3)" })}
+        ${kpi(t("ownerInvestment"), money(DB.expenses.totals.investedSoFar), { glow: "rgba(139,92,246,0.3)" })}
       </div>
+      <div style="margin:-8px 0 18px"><button class="btn ghost" onclick="location.hash='#/expenses'">${DB.expenses.totals ? "→ " + t("expenses") : ""}</button></div>
       <div class="grid cols-2">
         <div class="panel"><h3>${t("revenueTrend")}</h3>${barChart(DB.finance.monthly_revenue, "#22c55e")}</div>
         <div class="panel"><h3>Invoices</h3><div class="table-wrap"><table><thead><tr><th>${t("client")}</th><th>${t("amount")}</th><th>${t("status")}</th><th>${t("due")}</th></tr></thead><tbody>${rows}</tbody></table></div></div>
@@ -456,6 +465,53 @@
     return `<div class="section-title">${t("runbook")}</div><div class="grid" style="gap:14px">${cards}</div>`;
   }
 
+  function viewExpenses() {
+    const e = DB.expenses;
+    const label = (i) => (lang === "ar" && i.labelAr ? i.labelAr : i.label);
+    const months = e.months_rent_paid || 0;
+    const catColors = { Software: "#06b6d4", Office: "#8b5cf6", Rent: "#f59e0b", Legal: "#ec4899", Government: "#ef4444", Banking: "#22c55e" };
+
+    // Category rollup (one-time only, for the mix chart)
+    const byCat = {};
+    e.items.filter((i) => i.type === "one_time").forEach((i) => { byCat[i.category] = (byCat[i.category] || 0) + i.amount; });
+    const catRows = Object.entries(byCat)
+      .sort((a, b) => b[1] - a[1])
+      .map(([c, v]) => `<tr><td><span class="dot" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${catColors[c] || "#4f8cff"};margin-right:7px"></span>${esc(c)}</td><td>${money(v)}</td><td style="color:var(--muted-2)">${Math.round((v / e.totals.oneTime) * 100)}%</td><td><span class="mini-bar"><span style="width:${(v / e.totals.oneTime) * 100}%"></span></span></td></tr>`)
+      .join("");
+
+    const rows = e.items
+      .map((i) => `<tr>
+        <td><strong>${esc(label(i))}</strong></td>
+        <td><span class="dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${catColors[i.category] || "#4f8cff"};margin-right:6px"></span>${esc(i.category)}</td>
+        <td><span class="pill ${i.type === "monthly" ? "review" : "planning"}">${i.type === "monthly" ? t("monthly") : t("oneTime")}</span></td>
+        <td style="text-align:right;font-weight:600">${money(i.amount)}${i.type === "monthly" ? ` <span style="color:var(--muted-2);font-weight:400">/mo</span>` : ""}</td>
+      </tr>`)
+      .join("");
+
+    return `
+      <div class="kpi-row">
+        ${kpi(t("investedSoFar"), money(e.totals.investedSoFar), { glow: "rgba(34,211,238,0.35)" })}
+        ${kpi(t("startupCosts"), money(e.totals.oneTime), { glow: "rgba(139,92,246,0.3)" })}
+        ${kpi(t("monthlyRecurring"), money(e.totals.monthly), { glow: "rgba(245,158,11,0.3)" })}
+        ${kpi("Rent paid (" + months + " mo)", money(e.totals.recurringPaid), { glow: "rgba(34,197,94,0.3)" })}
+      </div>
+
+      <div class="grid cols-2">
+        <div class="panel">
+          <h3>${t("ownerInvestment")} <span style="color:var(--muted-2);font-weight:400;font-size:12px">— ${t("expensesNote")} ${months} ${lang === "ar" ? "شهر" : "mo"}</span></h3>
+          <div class="table-wrap"><table><thead><tr>
+            <th>${t("item")}</th><th>${t("category")}</th><th>${t("type")}</th><th style="text-align:right">${t("amount")}</th>
+          </tr></thead><tbody>${rows}</tbody>
+          <tfoot><tr><td colspan="3"><strong>${t("investedSoFar")}</strong></td><td style="text-align:right"><strong>${money(e.totals.investedSoFar)}</strong></td></tr></tfoot>
+          </table></div>
+        </div>
+        <div class="panel">
+          <h3>${t("byCategory")}</h3>
+          <div class="table-wrap"><table><tbody>${catRows}</tbody></table></div>
+        </div>
+      </div>`;
+  }
+
   function viewKnowledge() {
     const cards = DB.services
       .map((s) => {
@@ -497,6 +553,7 @@ $ npm run build   →  registered automatically</pre></div>`;
     "dashboard/executive": { title: () => t("executive"), crumb: () => t("dashboards"), render: viewExecutive },
     "dashboard/sales": { title: () => t("sales"), crumb: () => t("dashboards"), render: viewSales },
     "dashboard/finance": { title: () => t("finance"), crumb: () => t("dashboards"), render: viewFinance },
+    expenses: { title: () => t("expenses"), crumb: () => t("finance"), render: viewExpenses },
     "dashboard/operations": { title: () => t("operations"), crumb: () => t("dashboards"), render: viewOperations },
     clients: { title: () => t("clients"), crumb: () => t("workspace"), render: viewClients },
     projects: { title: () => t("projects"), crumb: () => t("workspace"), render: viewProjects },
@@ -551,6 +608,7 @@ $ npm run build   →  registered automatically</pre></div>`;
       ${item("dashboard/executive", "📊", t("executive"))}
       ${item("dashboard/sales", "💰", t("sales"))}
       ${item("dashboard/finance", "🧾", t("finance"))}
+      ${item("expenses", "🧮", t("expenses"))}
       ${item("dashboard/operations", "🛠️", t("operations"))}
       <div class="nav-group-label">${t("services")}</div>
       <div class="nav-item ${servicesOpen ? "active" : ""}" onclick="this.nextElementSibling.classList.toggle('open')"><span class="ico">🧱</span>${t("services")}<span class="count">${DB.services.length}</span></div>

@@ -26,6 +26,7 @@ const routes = [
   "#/dashboard/finance", "#/dashboard/operations", "#/service/cybersecurity",
   "#/service/seo/workflow", "#/service/ai-solutions/agent",
   "#/service/website-development/pricing", "#/service/seo/knowledge",
+  "#/dashboard/finance", "#/expenses",
   "#/clients", "#/projects", "#/knowledge", "#/agents", "#/automations", "#/reports",
 ];
 
