@@ -37,7 +37,7 @@
       addService: "Every service is a folder under services/. Add one (or run the seeder) and rebuild — it appears here automatically with its own dashboard, agent, workflow and pricing.",
       expenses: "Expenses", ownerInvestment: "Owner Investment", startupCosts: "Startup costs (one-time)",
       monthlyRecurring: "Monthly recurring", category: "Category", item: "Item", type: "Type",
-      investedSoFar: "Invested so far", oneTime: "one-time", monthly: "monthly", byCategory: "By category",
+      investedSoFar: "Invested so far", oneTime: "one-time", monthly: "monthly", byCategory: "By category", rentPaid: "Rent paid",
       expensesNote: "Paid by the owner from a personal account. Recurring rent counts",
     },
     ar: {
@@ -62,7 +62,7 @@
       addService: "كل خدمة هي مجلد داخل services/. أضِف مجلداً (أو شغّل السكربت) ثم أعد البناء — تظهر هنا تلقائياً بلوحتها ووكيلها وسير عملها وتسعيرها.",
       expenses: "المصاريف", ownerInvestment: "استثمار المالك", startupCosts: "مصاريف تأسيسية (مرة واحدة)",
       monthlyRecurring: "مصاريف شهرية متكررة", category: "الفئة", item: "البند", type: "النوع",
-      investedSoFar: "المدفوع حتى الآن", oneTime: "مرة واحدة", monthly: "شهري", byCategory: "حسب الفئة",
+      investedSoFar: "المدفوع حتى الآن", oneTime: "مرة واحدة", monthly: "شهري", byCategory: "حسب الفئة", rentPaid: "إجمالي الإيجار",
       expensesNote: "مدفوعة من المالك من الحساب الشخصي. الإيجار المتكرر محسوب لـ",
     },
   };
@@ -493,7 +493,7 @@
         ${kpi(t("investedSoFar"), money(e.totals.investedSoFar), { glow: "rgba(34,211,238,0.35)" })}
         ${kpi(t("startupCosts"), money(e.totals.oneTime), { glow: "rgba(139,92,246,0.3)" })}
         ${kpi(t("monthlyRecurring"), money(e.totals.monthly), { glow: "rgba(245,158,11,0.3)" })}
-        ${kpi("Rent paid (" + months + " mo)", money(e.totals.recurringPaid), { glow: "rgba(34,197,94,0.3)" })}
+        ${kpi(t("rentPaid") + " (" + (months + 1) + " " + (lang === "ar" ? "شهر" : "mo") + ")", money(e.totals.rentTotalPaid), { glow: "rgba(34,197,94,0.3)" })}
       </div>
 
       <div class="grid cols-2">

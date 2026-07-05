@@ -90,11 +90,18 @@ const data = {
   const oneTime = e.items.filter((i) => i.type === "one_time").reduce((a, i) => a + i.amount, 0);
   const monthly = e.items.filter((i) => i.type === "monthly").reduce((a, i) => a + i.amount, 0);
   const months = e.months_rent_paid || 0;
+  const rentOneTime = e.items
+    .filter((i) => i.type === "one_time" && i.category === "Rent")
+    .reduce((a, i) => a + i.amount, 0);
+  const recurringPaid = monthly * months;
   e.totals = {
     oneTime,
     monthly,
-    recurringPaid: monthly * months,
-    investedSoFar: oneTime + monthly * months,
+    months,
+    recurringPaid,
+    rentOneTime,
+    rentTotalPaid: rentOneTime + recurringPaid, // first month + all monthly payments
+    investedSoFar: oneTime + recurringPaid,
   };
 }
 

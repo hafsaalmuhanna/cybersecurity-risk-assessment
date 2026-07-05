@@ -1,7 +1,8 @@
 {
   "currency": "KWD",
-  "note": "Startup costs paid by the owner from a personal account. months_paid controls how many recurring rent payments are counted in the owner-investment total.",
-  "months_rent_paid": 0,
+  "note": "Startup costs paid by the owner from a personal account. Rent started Jun 2025; one full year of occupancy = 12 months. The first month was billed at 580 (deposit/commission) and is the one_time Rent item below; months_rent_paid counts the remaining months billed at the 280 monthly rate (11).",
+  "rent_start": "2025-06",
+  "months_rent_paid": 11,
   "items": [
     { "id": "e1", "label": "Larais app", "labelAr": "تطبيق لاريز", "amount": 6000, "category": "Software", "type": "one_time" },
     { "id": "e2", "label": "Payment gateway", "labelAr": "بوابة الدفع", "amount": 1000, "category": "Software", "type": "one_time" },
