@@ -1,5 +1,9 @@
 # Cybersecurity Risk Assessment
 
+> 🚀 **New:** VR + AI Cybersecurity Education Platform — master plan (bilingual AR/EN):
+> see [`docs/PLATFORM_PLAN.md`](docs/PLATFORM_PLAN.md).
+> منصة تعليم الأمن السيبراني بالواقع الافتراضي والذكاء الاصطناعي — الخطة الشاملة في الرابط أعلاه.
+
 ## Project Introduction
 This project demonstrates a practical cybersecurity risk assessment for a fictional organization. The goal is to identify critical assets, analyze potential threats and vulnerabilities, and evaluate risks that could impact confidentiality, integrity, and availability.
 
