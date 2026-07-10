@@ -1,5 +1,9 @@
 # الرصد العالمي والهوية والاسم / Global Landscape, Identity & Naming
 
+> ✅ **القرار النهائي / FINAL DECISION:** الاسم المعتمد هو **CyberFaris — سايبر فارس** (`cyberfaris.com`).
+> راجع دليل العلامة الكامل في `BRAND_CYBERFARIS.md`. الأقسام أدناه توثّق رحلة البحث التي أوصلتنا إليه.
+> The chosen brand is **CyberFaris** — see `BRAND_CYBERFARIS.md`. The sections below document the research journey that led there.
+>
 > رفيقة وثيقة الخطة الأساسية `PLATFORM_PLAN.md`
 > Companion to the master plan `PLATFORM_PLAN.md`
 >

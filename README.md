@@ -1,8 +1,9 @@
 # Cybersecurity Risk Assessment
 
-> 🚀 **New:** VR + AI Cybersecurity Education Platform — master plan (bilingual AR/EN):
-> see [`docs/PLATFORM_PLAN.md`](docs/PLATFORM_PLAN.md).
-> منصة تعليم الأمن السيبراني بالواقع الافتراضي والذكاء الاصطناعي — الخطة الشاملة في الرابط أعلاه.
+> 🐎🛡️ **CyberFaris — سايبر فارس:** first global virtual school that forges Cyber Knights (VR + AI, inclusive by design, from Kuwait).
+> - Brand & curriculum: [`docs/BRAND_CYBERFARIS.md`](docs/BRAND_CYBERFARIS.md)
+> - Master plan (bilingual): [`docs/PLATFORM_PLAN.md`](docs/PLATFORM_PLAN.md)
+> - Landscape & naming research: [`docs/BRANDING_AND_LANDSCAPE.md`](docs/BRANDING_AND_LANDSCAPE.md)
 
 ## Project Introduction
 This project demonstrates a practical cybersecurity risk assessment for a fictional organization. The goal is to identify critical assets, analyze potential threats and vulnerabilities, and evaluate risks that could impact confidentiality, integrity, and availability.
