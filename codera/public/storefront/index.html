@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>المتجر · Codera</title>
+  <link rel="stylesheet" href="/assets/codera.css" />
+  <style>
+    .top { position: sticky; top:0; z-index: 20; backdrop-filter: blur(10px);
+      background: rgba(16,14,12,.75); border-bottom: 1px solid var(--line); }
+    .top .container { display:flex; align-items:center; justify-content:space-between; padding: 14px 20px; }
+    .brand { display:flex; align-items:center; gap: 12px; font-weight: 800; }
+    .brand .logo { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(180deg,var(--gold-2),var(--gold)); color:#2a2113; display:grid; place-items:center; font-weight:900; }
+    .hero { text-align:center; padding: 30px 0 10px; }
+    .products { display:grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 16px; padding: 16px 0 60px; }
+    .pcard { overflow:hidden; cursor:pointer; transition: transform .12s, border-color .2s; }
+    .pcard:hover { transform: translateY(-3px); border-color: var(--gold); }
+    .pcard .img { aspect-ratio: 4/5; background:#f6f3ee; }
+    .pcard .img img { width:100%; height:100%; object-fit: cover; }
+    .pcard .body { padding: 12px 14px; }
+    .pcard .title { font-weight:700; font-size: 15px; }
+    .pcard .price { color: var(--gold-2); font-weight:800; margin-top:4px; }
+
+    /* modal */
+    .overlay { position: fixed; inset:0; background: rgba(0,0,0,.72); display:none; z-index: 50;
+      align-items:flex-end; justify-content:center; }
+    .overlay.show { display:flex; }
+    .sheet { width: 100%; max-width: 720px; background: var(--bg-2); border: 1px solid var(--line);
+      border-radius: 22px 22px 0 0; max-height: 94vh; overflow:auto; }
+    @media (min-width: 760px){ .overlay { align-items:center; } .sheet { border-radius: 22px; } }
+    .sheet-head { display:flex; align-items:center; justify-content:space-between; padding: 16px 18px; position:sticky; top:0; background:var(--bg-2); border-bottom:1px solid var(--line); z-index:2;}
+    .sheet-body { padding: 18px; }
+    .stage { aspect-ratio: 3/4; border-radius: 16px; overflow:hidden; background:#0d0b09; border:1px solid var(--line); position:relative; display:grid; place-items:center; }
+    .stage img { width:100%; height:100%; object-fit: cover; }
+    .stage .placeholder { text-align:center; color: var(--muted); padding: 20px; }
+    .stage .loading { position:absolute; inset:0; display:grid; place-items:center; gap:14px; background: rgba(13,11,9,.8); }
+    .models-row { display:flex; gap: 10px; overflow-x:auto; padding: 4px 0 8px; }
+    .mcard { flex: 0 0 auto; width: 92px; text-align:center; cursor:pointer; }
+    .mcard .ph { width:92px; height:110px; border-radius: 14px; overflow:hidden; border: 2px solid transparent; background:#1c1a16;}
+    .mcard.sel .ph { border-color: var(--gold); }
+    .mcard .ph img { width:100%; height:100%; object-fit:cover; }
+    .mcard .nm { font-size: 12px; margin-top:6px; }
+    .mcard .tag { font-size: 10px; color: var(--muted); }
+    .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .section-label { font-size: 13px; color: var(--muted); margin: 16px 2px 8px; }
+    .trywith { display:flex; align-items:center; justify-content:space-between; gap:12px;
+      border:1px solid var(--gold); border-radius: 16px; padding: 12px 14px; margin-top: 14px;
+      background: linear-gradient(90deg, rgba(201,162,74,.08), transparent); }
+  </style>
+</head>
+<body>
+  <div class="top"><div class="container">
+    <div class="brand"><div class="logo" id="brandLogo">C</div><div id="brandName">المتجر</div></div>
+    <div class="chip">تجربة لبس بالذكاء الاصطناعي</div>
+  </div></div>
+
+  <div class="container">
+    <div class="hero">
+      <h1 id="heroTitle">جرّبيها قبل الشراء</h1>
+      <p class="muted" id="heroTag">شوفي القطعة على موديل يشبهك — أو على صورتك أنتِ.</p>
+    </div>
+    <div class="products" id="products"></div>
+  </div>
+
+  <!-- Try-on sheet -->
+  <div class="overlay" id="overlay">
+    <div class="sheet">
+      <div class="sheet-head">
+        <div class="badge-ai"><span class="dot">AI</span><b id="sheetTitle">التجربة الافتراضية</b></div>
+        <button class="btn ghost sm" onclick="TryOn.close()">إغلاق</button>
+      </div>
+      <div class="sheet-body">
+        <div class="grid" style="grid-template-columns: 1fr; gap:18px;">
+          <div class="stage" id="stage">
+            <div class="placeholder" id="stagePh">اختاري موديل ثم اضغطي «جرّبيها»</div>
+          </div>
+          <div>
+            <div class="section-label">القطعة</div>
+            <div class="row"><img id="garmentThumb" style="width:56px;height:70px;object-fit:cover;border-radius:10px;background:#f6f3ee" /><div><div id="prodTitle" style="font-weight:700"></div><div id="prodPrice" class="gold" style="font-weight:800"></div></div></div>
+
+            <div class="section-label">اختاري الموديل</div>
+            <div class="models-row" id="models"></div>
+
+            <div class="section-label">الوضعية</div>
+            <div class="row" id="poses"></div>
+
+            <label class="chip" style="margin-top:12px; cursor:pointer; user-select:none;">
+              <input type="checkbox" id="hijab" style="width:auto;margin-inline-end:6px;" /> حجاب
+            </label>
+
+            <div class="trywith">
+              <div><b>جرّبيها بصورتك</b><div class="muted" style="font-size:12px">ارفعي صورتك لترينها عليكِ</div></div>
+              <label class="btn ghost sm" style="cursor:pointer">رفع صورة<input type="file" id="shopper" accept="image/*" hidden></label>
+            </div>
+
+            <button class="btn block" id="goBtn" style="margin-top:16px" onclick="TryOn.generate()">جرّبيها الآن</button>
+            <div class="muted" id="quotaNote" style="text-align:center;font-size:12px;margin-top:8px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="/store/app.js"></script>
+</body>
+</html>

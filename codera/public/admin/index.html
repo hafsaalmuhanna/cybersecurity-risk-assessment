@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لوحة المنصّة · Codera</title>
+  <link rel="stylesheet" href="/assets/codera.css" />
+  <style>
+    .wrap { min-height:100vh; display:grid; place-items:center; padding:20px; }
+    .stats { display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin: 20px 0; }
+    .stat { padding:20px; } .stat .n { font-size:32px;font-weight:900;color:var(--gold-2); } .stat .l { color:var(--muted);font-size:13px; }
+    table { width:100%;border-collapse:collapse; } th,td { text-align:right;padding:12px 10px;border-bottom:1px solid var(--line);font-size:14px; } th { color:var(--muted); }
+    .app { display:none; } .app.show { display:block; }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="login">
+    <div class="card" style="width:100%;max-width:400px;padding:28px">
+      <h2>لوحة المنصّة</h2><p class="muted">Codera Admin</p>
+      <div class="field"><label>البريد</label><input id="email" value="admin@codera.app"></div>
+      <div class="field"><label>كلمة المرور</label><input id="pass" type="password" value="admin1234"></div>
+      <button class="btn block" onclick="login()">دخول</button>
+    </div>
+  </div>
+
+  <div class="app" id="app">
+    <div class="container" style="padding:24px 20px">
+      <div class="head" style="display:flex;justify-content:space-between;align-items:center"><h2>مؤشرات المنصّة</h2><button class="btn ghost sm" onclick="logout()">خروج</button></div>
+      <div class="stats" id="stats"></div>
+      <div class="card" style="padding:18px">
+        <b>المتاجر (المستأجرون)</b>
+        <div id="tenants" style="margin-top:12px"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script>
+    const $ = (id)=>document.getElementById(id);
+    function toast(m,e){const t=$('toast');t.textContent=m;t.className='toast show'+(e?' err':'');setTimeout(()=>t.className='toast',2600);}
+    async function jf(u,o){const r=await fetch(u,Object.assign({headers:{'Content-Type':'application/json'}},o));const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'خطأ');return d;}
+    async function login(){try{await jf('/api/admin/login',{method:'POST',body:JSON.stringify({email:$('email').value,password:$('pass').value})});boot();}catch(e){toast(e.message,true);}}
+    async function logout(){await fetch('/api/admin/logout',{method:'POST'});location.reload();}
+    async function boot(){
+      let d; try{ d=await jf('/api/admin/overview'); }catch{ $('login').style.display='grid'; $('app').classList.remove('show'); return; }
+      $('login').style.display='none'; $('app').classList.add('show');
+      const t=d.totals;
+      $('stats').innerHTML = `
+        <div class="card stat"><div class="n">${t.tenants}</div><div class="l">متاجر</div></div>
+        <div class="card stat"><div class="n">${t.active}</div><div class="l">اشتراك نشط</div></div>
+        <div class="card stat"><div class="n">${t.tryons}</div><div class="l">تجارب إجمالية</div></div>
+        <div class="card stat"><div class="n">${new Intl.NumberFormat('ar-SA').format(t.mrr)}</div><div class="l">إيراد شهري متكرر (SAR)</div></div>`;
+      $('tenants').innerHTML = `<table><tr><th>المتجر</th><th>الرابط</th><th>الدومين</th><th>الباقة</th><th>الحالة</th><th>منتجات</th><th>استهلاك الشهر</th></tr>
+        ${d.tenants.map(x=>`<tr><td>${x.name}</td><td>${x.slug}</td><td class="muted">${x.custom_domain||'—'}</td><td>${x.plan_id||'—'}</td><td>${x.status}</td><td>${x.products}</td><td>${x.usage}</td></tr>`).join('')}</table>`;
+    }
+    boot();
+  </script>
+</body>
+</html>
