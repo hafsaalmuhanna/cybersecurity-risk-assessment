@@ -61,12 +61,16 @@ const TryOn = {
     document.getElementById('overlay').classList.add('show');
   },
   close() { document.getElementById('overlay').classList.remove('show'); },
+  modelImg(m) {
+    const hijab = document.getElementById('hijab') && document.getElementById('hijab').checked;
+    return (hijab && m.image_hijab_url) ? m.image_hijab_url : m.image_url;
+  },
   renderModels() {
     const el = document.getElementById('models');
     el.innerHTML = State.models.map((m) => `
       <div class="mcard ${State.sel.model && State.sel.model.id === m.id ? 'sel' : ''}" onclick="TryOn.pickModel(${m.id})">
-        <div class="ph"><img src="${m.image_url}" alt=""></div>
-        <div class="nm">${esc(m.name)}</div><div class="tag">${esc(m.ethnicity || '')}${m.hijab ? ' · محجّبة' : ''}</div>
+        <div class="ph"><img src="${this.modelImg(m)}" alt=""></div>
+        <div class="nm">${esc(m.name)}</div><div class="tag">${esc(m.ethnicity || '')}${m.image_hijab_url ? ' · حجاب متاح' : ''}</div>
       </div>`).join('');
   },
   renderPoses() {
@@ -111,6 +115,9 @@ const TryOn = {
   },
 };
 window.TryOn = TryOn;
+
+// swap model thumbnails to the hijab variant instantly when toggled
+document.getElementById('hijab').addEventListener('change', () => TryOn.renderModels());
 
 document.getElementById('shopper').addEventListener('change', (e) => {
   const f = e.target.files[0]; if (!f) return;

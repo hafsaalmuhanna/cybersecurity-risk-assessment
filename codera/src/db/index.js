@@ -14,6 +14,17 @@ export const db = new DatabaseSync(dbPath);
 export function initSchema() {
   const schema = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
   db.exec(schema);
+  runMigrations();
+}
+
+// Idempotent, additive migrations (safe to run on every boot).
+function runMigrations() {
+  const cols = (table) => db.prepare(`PRAGMA table_info(${table})`).all().map((c) => c.name);
+  const addColumn = (table, col, def) => {
+    if (!cols(table).includes(col)) db.exec(`ALTER TABLE ${table} ADD COLUMN ${def}`);
+  };
+  // hijab variant image per model (base image + a hijab version)
+  addColumn('house_models', 'image_hijab_url', 'image_hijab_url TEXT');
 }
 
 // --- tiny query helpers ---

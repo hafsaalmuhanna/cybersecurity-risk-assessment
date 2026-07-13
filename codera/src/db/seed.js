@@ -50,9 +50,11 @@ for (const m of houseModels) {
       m.name, m.ethnicity, m.skin_tone, m.hair, m.hijab, JSON.stringify(m.poses));
     id = r.lastInsertRowid;
   }
-  const file = path.join(modelsDir, `${id}.svg`);
-  fs.writeFileSync(file, modelPortraitSVG({ ...m }));
-  run('UPDATE house_models SET image_url=? WHERE id=?', `/assets/models/${id}.svg`, id);
+  // two variants per model: base (no hijab) and hijab
+  fs.writeFileSync(path.join(modelsDir, `${id}.svg`), modelPortraitSVG({ ...m, hijab: 0 }));
+  fs.writeFileSync(path.join(modelsDir, `${id}_hijab.svg`), modelPortraitSVG({ ...m, hijab: 1 }));
+  run('UPDATE house_models SET image_url=?, image_hijab_url=? WHERE id=?',
+    `/assets/models/${id}.svg`, `/assets/models/${id}_hijab.svg`, id);
   modelIds.push(id);
 }
 

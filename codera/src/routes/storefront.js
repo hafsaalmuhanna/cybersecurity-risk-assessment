@@ -34,12 +34,14 @@ async function processJob(jobId, tenant) {
     const model = job.model_id ? get('SELECT * FROM house_models WHERE id = ?', job.model_id) : null;
     const provider = getProvider();
     const origin = tenant?._origin || '';
+    // pick the hijab variant of the model when the shopper requested hijab
+    const modelImg = model ? ((job.hijab && model.image_hijab_url) ? model.image_hijab_url : model.image_url) : null;
     const result = await provider.generate({
       title: product?.title,
       category: product?.category || 'top',
       garmentUrl: product?.garment_url,
       publicGarmentUrl: product?.garment_url ? origin + product.garment_url : undefined,
-      publicModelUrl: model?.image_url ? origin + model.image_url : undefined,
+      publicModelUrl: modelImg ? origin + modelImg : undefined,
       modelName: model?.name,
       skinTone: model?.skin_tone,
       hijab: !!job.hijab,
@@ -61,7 +63,7 @@ export function register(router) {
     const models = all(
       `SELECT hm.* FROM house_models hm JOIN tenant_models tm ON tm.model_id = hm.id
        WHERE tm.tenant_id = ? AND tm.enabled = 1 AND hm.active = 1 ORDER BY hm.id`, tenant.id
-    ).map((m) => ({ id: m.id, name: m.name, ethnicity: m.ethnicity, skin_tone: m.skin_tone, hair: m.hair, hijab: !!m.hijab, poses: JSON.parse(m.poses_json || '[]'), image_url: m.image_url }));
+    ).map((m) => ({ id: m.id, name: m.name, ethnicity: m.ethnicity, skin_tone: m.skin_tone, hair: m.hair, hijab: !!m.hijab, poses: JSON.parse(m.poses_json || '[]'), image_url: m.image_url, image_hijab_url: m.image_hijab_url }));
     const products = all("SELECT * FROM products WHERE tenant_id = ? AND status='active' ORDER BY created_at DESC LIMIT 60", tenant.id).map(productOut);
     sendJson(res, 200, {
       store: { name: tenant.name, slug: tenant.slug, brand: tenant.brand },
