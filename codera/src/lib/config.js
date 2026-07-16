@@ -37,6 +37,13 @@ export const config = {
     replicateToken: process.env.REPLICATE_API_TOKEN || '',
     replicateVersion: process.env.REPLICATE_TRYON_VERSION || '',
   },
+  image: {
+    provider: process.env.IMAGE_PROVIDER || 'mock',
+    replicateToken: process.env.REPLICATE_API_TOKEN || '',
+    replicateVersion: process.env.IMAGE_MODEL_VERSION || '',
+    openaiKey: process.env.OPENAI_API_KEY || '',
+    falKey: process.env.FAL_KEY || '',
+  },
   shopify: {
     apiVersion: process.env.SHOPIFY_API_VERSION || '2024-10',
   },

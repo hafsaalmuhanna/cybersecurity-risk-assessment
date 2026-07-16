@@ -33,9 +33,12 @@
       </div>
 
       <div class="card" style="padding:18px;margin-top:16px">
-        <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
           <b>العارضات (مكتبة Codera)</b>
-          <button class="btn sm" onclick="Models.openNew()">+ عارضة جديدة</button>
+          <div style="display:flex;gap:8px">
+            <button class="btn sm" onclick="Models.openGen()">✨ توليد بالذكاء الاصطناعي</button>
+            <button class="btn ghost sm" onclick="Models.openNew()">+ رفع يدوي</button>
+          </div>
         </div>
         <div id="models" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-top:14px"></div>
       </div>
@@ -58,6 +61,20 @@
       </div>
       <label class="chip" style="cursor:pointer;user-select:none"><input type="checkbox" id="m_default_hijab" style="width:auto;margin-inline-end:6px">تفعيل الحجاب افتراضياً</label>
       <button class="btn block" style="margin-top:16px" onclick="Models.save()">حفظ العارضة</button>
+    </div>
+  </div>
+
+  <!-- AI generate model -->
+  <div id="gModal" style="position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;place-items:center;z-index:60;padding:20px">
+    <div class="card" style="width:100%;max-width:460px;padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h3>✨ توليد عارضة بالذكاء الاصطناعي</h3><button class="btn ghost sm" onclick="Models.closeGen()">✕</button></div>
+      <p class="muted" style="font-size:13px">اكتبي الاسم واختاري المواصفات — يولّد نسخة عادية ونسخة بحجاب تلقائياً.</p>
+      <div class="field"><label>الاسم</label><input id="g_name" placeholder="مثال: ليلى"></div>
+      <div class="field"><label>الإثنية/المظهر</label><input id="g_eth" placeholder="خليجي · جنوب آسيوي · متوسطي ..."></div>
+      <div class="field"><label>لون البشرة</label><select id="g_skin"><option value="فاتح">فاتح</option><option value="متوسط" selected>متوسط</option><option value="حنطي">حنطي</option><option value="داكن">داكن</option></select></div>
+      <label class="chip" style="cursor:pointer;user-select:none"><input type="checkbox" id="g_default_hijab" style="width:auto;margin-inline-end:6px">تظهر بالحجاب افتراضياً</label>
+      <button class="btn block" id="g_btn" style="margin-top:16px" onclick="Models.generate()">توليد العارضة</button>
+      <div id="g_status" class="muted" style="text-align:center;font-size:13px;margin-top:10px"></div>
     </div>
   </div>
 
@@ -109,6 +126,19 @@
         try{ if(this.editing)await jf('/api/admin/models/'+this.editing,{method:'PATCH',body:JSON.stringify(body)}); else await jf('/api/admin/models',{method:'POST',body:JSON.stringify(body)}); this.close();toast('تم الحفظ');this.load(); }catch(e){toast(e.message,true);}
       },
       async del(id){ if(!confirm('حذف العارضة؟'))return; await jf('/api/admin/models/'+id,{method:'DELETE'}); this.load(); },
+      openGen(){$('g_name').value='';$('g_eth').value='';$('g_skin').value='متوسط';$('g_default_hijab').checked=false;$('g_status').textContent='';$('gModal').style.display='grid';},
+      closeGen(){$('gModal').style.display='none';},
+      async generate(){
+        const name=$('g_name').value.trim(); if(!name)return toast('اكتبي الاسم',true);
+        $('g_btn').disabled=true; $('g_status').textContent='⏳ جاري توليد النسختين (عادية + حجاب)…';
+        try{
+          const r=await jf('/api/admin/models/generate',{method:'POST',body:JSON.stringify({name,ethnicity:$('g_eth').value,skin_tone:$('g_skin').value,hijab:$('g_default_hijab').checked})});
+          $('g_status').textContent = r.note ? ('✓ تم — '+r.note) : '✓ تم التوليد';
+          toast('تم توليد العارضة: '+name); this.load();
+          setTimeout(()=>this.closeGen(),1200);
+        }catch(e){$('g_status').textContent='';toast(e.message,true);}
+        finally{$('g_btn').disabled=false;}
+      },
     };
     $('m_base').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;Models.base=await fileToUrl(f);const p=$('m_basePv');p.src=Models.base;p.style.display='block';});
     $('m_hijab').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;Models.hijab=await fileToUrl(f);const p=$('m_hijabPv');p.src=Models.hijab;p.style.display='block';});

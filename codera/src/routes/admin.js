@@ -7,6 +7,7 @@ import { createSession, destroySession, currentAdmin } from '../lib/auth.js';
 import { sendJson, readJson } from '../lib/http.js';
 import { config } from '../lib/config.js';
 import { currentPeriod } from '../services/billing/plans.js';
+import { generateModelImage } from '../services/ai/imagegen.js';
 
 const modelsDir = path.join(config.publicDir, 'assets', 'models');
 function saveModelImage(dataUrl) {
@@ -110,5 +111,43 @@ export function register(router) {
     if (!guard(req, res)) return;
     run('DELETE FROM house_models WHERE id=?', params.id);
     sendJson(res, 200, { ok: true });
+  });
+
+  // Generate a named model with AI (base + hijab variants) and save it.
+  router.post('/api/admin/models/generate', async ({ req, res }) => {
+    if (!guard(req, res)) return;
+    const b = await readJson(req);
+    if (!b.name) return sendJson(res, 400, { error: 'الاسم مطلوب' });
+    const attrs = { name: b.name, ethnicity: b.ethnicity || '', skinTone: b.skin_tone || 'متوسط' };
+    try {
+      const base = await generateModelImage({ ...attrs, hijab: false });
+      const hijab = await generateModelImage({ ...attrs, hijab: true });
+      const poses = Array.isArray(b.poses) && b.poses.length ? b.poses : ['بورتريه', 'وقوف'];
+      const r = run('INSERT INTO house_models (name,ethnicity,skin_tone,hair,hijab,poses_json,active,image_url,image_hijab_url) VALUES (?,?,?,?,?,?,1,?,?)',
+        b.name, attrs.ethnicity, attrs.skinTone, b.hair || '', b.hijab ? 1 : 0, JSON.stringify(poses), base.url, hijab.url);
+      sendJson(res, 200, {
+        model: modelOut(get('SELECT * FROM house_models WHERE id=?', r.lastInsertRowid)),
+        provider: base.provider,
+        note: base.provider === 'mock' ? 'صورة توضيحية — أضِف مفتاح مزوّد صور في .env لصور واقعية' : undefined,
+      });
+    } catch (e) {
+      sendJson(res, 502, { error: 'تعذّر التوليد: ' + e.message });
+    }
+  });
+
+  // Regenerate one variant for an existing model
+  router.post('/api/admin/models/:id/regenerate', async ({ req, res, params }) => {
+    if (!guard(req, res)) return;
+    const m = get('SELECT * FROM house_models WHERE id=?', params.id);
+    if (!m) return sendJson(res, 404, { error: 'غير موجود' });
+    const b = await readJson(req);
+    const withHijab = !!b.hijab;
+    try {
+      const img = await generateModelImage({ name: m.name, ethnicity: m.ethnicity, skinTone: m.skin_tone, hijab: withHijab });
+      run(`UPDATE house_models SET ${withHijab ? 'image_hijab_url' : 'image_url'}=? WHERE id=?`, img.url, m.id);
+      sendJson(res, 200, { url: img.url, provider: img.provider });
+    } catch (e) {
+      sendJson(res, 502, { error: 'تعذّر التوليد: ' + e.message });
+    }
   });
 }

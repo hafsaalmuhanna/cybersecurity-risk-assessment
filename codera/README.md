@@ -63,6 +63,7 @@ codera/
 ## التوثيق
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — الخطة والمعمارية التفصيلية
+- [`docs/MODELS.md`](docs/MODELS.md) — كيف تولّدين العارضات وتسمّينهن (+ prompts جاهزة)
 - [`docs/SHOPIFY_MIGRATION.md`](docs/SHOPIFY_MIGRATION.md) — كيف ننقل بيانات عميلة من شوبيفاي
 - [`docs/PRICING.md`](docs/PRICING.md) — الباقات + توصية الفوترة (UPayment والبدائل الأوفر)
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — مراحل التطوير حتى الإطلاق
