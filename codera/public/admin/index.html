@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لوحة المنصّة · Codera</title>
+  <link rel="stylesheet" href="/assets/codera.css" />
+  <style>
+    .wrap { min-height:100vh; display:grid; place-items:center; padding:20px; }
+    .stats { display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin: 20px 0; }
+    .stat { padding:20px; } .stat .n { font-size:32px;font-weight:900;color:var(--gold-2); } .stat .l { color:var(--muted);font-size:13px; }
+    table { width:100%;border-collapse:collapse; } th,td { text-align:right;padding:12px 10px;border-bottom:1px solid var(--line);font-size:14px; } th { color:var(--muted); }
+    .app { display:none; } .app.show { display:block; }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="login">
+    <div class="card" style="width:100%;max-width:400px;padding:28px">
+      <h2>لوحة المنصّة</h2><p class="muted">Codera Admin</p>
+      <div class="field"><label>البريد</label><input id="email" value="admin@codera.app"></div>
+      <div class="field"><label>كلمة المرور</label><input id="pass" type="password" value="admin1234"></div>
+      <button class="btn block" onclick="login()">دخول</button>
+    </div>
+  </div>
+
+  <div class="app" id="app">
+    <div class="container" style="padding:24px 20px">
+      <div class="head" style="display:flex;justify-content:space-between;align-items:center"><h2>مؤشرات المنصّة</h2><button class="btn ghost sm" onclick="logout()">خروج</button></div>
+      <div class="stats" id="stats"></div>
+      <div class="card" style="padding:18px">
+        <b>المتاجر (المستأجرون)</b>
+        <div id="tenants" style="margin-top:12px"></div>
+      </div>
+
+      <div class="card" style="padding:18px;margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+          <b>العارضات (مكتبة Codera)</b>
+          <div style="display:flex;gap:8px">
+            <button class="btn sm" onclick="Models.openGen()">✨ توليد بالذكاء الاصطناعي</button>
+            <button class="btn ghost sm" onclick="Models.openNew()">+ رفع يدوي</button>
+          </div>
+        </div>
+        <div id="models" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-top:14px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- model editor -->
+  <div class="modal" id="mModal" style="position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;place-items:center;z-index:60;padding:20px">
+    <div class="card" style="width:100%;max-width:520px;max-height:92vh;overflow:auto;padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h3 id="m_title">عارضة جديدة</h3><button class="btn ghost sm" onclick="Models.close()">✕</button></div>
+      <div class="field"><label>الاسم</label><input id="m_name" placeholder="ليلى"></div>
+      <div class="field"><label>الإثنية/الوصف</label><input id="m_eth" placeholder="خليجي"></div>
+      <div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field"><label>لون البشرة</label><select id="m_skin"><option value="فاتح">فاتح</option><option value="متوسط">متوسط</option><option value="حنطي">حنطي</option><option value="داكن">داكن</option></select></div>
+        <div class="field"><label>الوضعيات (بفواصل)</label><input id="m_poses" value="بورتريه, وقوف"></div>
+      </div>
+      <div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field"><label>صورة العارضة (بدون حجاب)</label><input id="m_base" type="file" accept="image/*"><img id="m_basePv" style="max-width:100%;border-radius:10px;margin-top:8px;display:none"></div>
+        <div class="field"><label>صورة بحجاب</label><input id="m_hijab" type="file" accept="image/*"><img id="m_hijabPv" style="max-width:100%;border-radius:10px;margin-top:8px;display:none"></div>
+      </div>
+      <label class="chip" style="cursor:pointer;user-select:none"><input type="checkbox" id="m_default_hijab" style="width:auto;margin-inline-end:6px">تفعيل الحجاب افتراضياً</label>
+      <button class="btn block" style="margin-top:16px" onclick="Models.save()">حفظ العارضة</button>
+    </div>
+  </div>
+
+  <!-- AI generate model -->
+  <div id="gModal" style="position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;place-items:center;z-index:60;padding:20px">
+    <div class="card" style="width:100%;max-width:460px;padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h3>✨ توليد عارضة بالذكاء الاصطناعي</h3><button class="btn ghost sm" onclick="Models.closeGen()">✕</button></div>
+      <p class="muted" style="font-size:13px">اكتبي الاسم واختاري المواصفات — يولّد نسخة عادية ونسخة بحجاب تلقائياً.</p>
+      <div class="field"><label>الاسم</label><input id="g_name" placeholder="مثال: ليلى"></div>
+      <div class="field"><label>الإثنية/المظهر</label><input id="g_eth" placeholder="خليجي · جنوب آسيوي · متوسطي ..."></div>
+      <div class="field"><label>لون البشرة</label><select id="g_skin"><option value="فاتح">فاتح</option><option value="متوسط" selected>متوسط</option><option value="حنطي">حنطي</option><option value="داكن">داكن</option></select></div>
+      <label class="chip" style="cursor:pointer;user-select:none"><input type="checkbox" id="g_default_hijab" style="width:auto;margin-inline-end:6px">تظهر بالحجاب افتراضياً</label>
+      <button class="btn block" id="g_btn" style="margin-top:16px" onclick="Models.generate()">توليد العارضة</button>
+      <div id="g_status" class="muted" style="text-align:center;font-size:13px;margin-top:10px"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script>
+    const $ = (id)=>document.getElementById(id);
+    function toast(m,e){const t=$('toast');t.textContent=m;t.className='toast show'+(e?' err':'');setTimeout(()=>t.className='toast',2600);}
+    async function jf(u,o){const r=await fetch(u,Object.assign({headers:{'Content-Type':'application/json'}},o));const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'خطأ');return d;}
+    async function login(){try{await jf('/api/admin/login',{method:'POST',body:JSON.stringify({email:$('email').value,password:$('pass').value})});boot();}catch(e){toast(e.message,true);}}
+    async function logout(){await fetch('/api/admin/logout',{method:'POST'});location.reload();}
+    async function boot(){
+      let d; try{ d=await jf('/api/admin/overview'); }catch{ $('login').style.display='grid'; $('app').classList.remove('show'); return; }
+      $('login').style.display='none'; $('app').classList.add('show');
+      const t=d.totals;
+      $('stats').innerHTML = `
+        <div class="card stat"><div class="n">${t.tenants}</div><div class="l">متاجر</div></div>
+        <div class="card stat"><div class="n">${t.active}</div><div class="l">اشتراك نشط</div></div>
+        <div class="card stat"><div class="n">${t.tryons}</div><div class="l">تجارب إجمالية</div></div>
+        <div class="card stat"><div class="n">${new Intl.NumberFormat('ar-SA').format(t.mrr)}</div><div class="l">إيراد شهري متكرر (SAR)</div></div>`;
+      $('tenants').innerHTML = `<table><tr><th>المتجر</th><th>الرابط</th><th>الدومين</th><th>الباقة</th><th>الحالة</th><th>منتجات</th><th>استهلاك الشهر</th></tr>
+        ${d.tenants.map(x=>`<tr><td>${x.name}</td><td>${x.slug}</td><td class="muted">${x.custom_domain||'—'}</td><td>${x.plan_id||'—'}</td><td>${x.status}</td><td>${x.products}</td><td>${x.usage}</td></tr>`).join('')}</table>`;
+      Models.load();
+    }
+
+    const esc=(s)=>(s||'').replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+    const fileToUrl=(f)=>new Promise(r=>{const x=new FileReader();x.onload=()=>r(x.result);x.readAsDataURL(f);});
+    const Models = {
+      editing:null, base:null, hijab:null,
+      async load(){
+        const {models}=await jf('/api/admin/models');
+        $('models').innerHTML = models.map(m=>`
+          <div class="card" style="overflow:hidden">
+            <div style="aspect-ratio:3/4;background:#1c1a16">${m.image_url?`<img src="${m.image_url}" style="width:100%;height:100%;object-fit:cover">`:''}</div>
+            <div style="padding:10px">
+              <b>${esc(m.name)}</b><div class="muted" style="font-size:12px">${esc(m.ethnicity||'')}${m.image_hijab_url?' · حجاب ✓':''}</div>
+              <div style="display:flex;gap:6px;margin-top:8px">
+                <button class="btn ghost sm" onclick='Models.edit(${JSON.stringify(m).replace(/'/g,"&#39;")})'>تعديل</button>
+                <button class="btn ghost sm" onclick="Models.del(${m.id})">حذف</button>
+              </div>
+            </div>
+          </div>`).join('') || '<p class="muted">لا توجد عارضات.</p>';
+      },
+      openNew(){this.editing=null;this.base=null;this.hijab=null;$('m_title').textContent='عارضة جديدة';$('m_name').value='';$('m_eth').value='';$('m_skin').value='متوسط';$('m_poses').value='بورتريه, وقوف';$('m_default_hijab').checked=false;$('m_basePv').style.display='none';$('m_hijabPv').style.display='none';$('mModal').style.display='grid';},
+      edit(m){this.editing=m.id;this.base=null;this.hijab=null;$('m_title').textContent='تعديل عارضة';$('m_name').value=m.name;$('m_eth').value=m.ethnicity||'';$('m_skin').value=m.skin_tone||'متوسط';$('m_poses').value=(m.poses||[]).join(', ');$('m_default_hijab').checked=!!m.hijab;const bp=$('m_basePv');if(m.image_url){bp.src=m.image_url;bp.style.display='block';}else bp.style.display='none';const hp=$('m_hijabPv');if(m.image_hijab_url){hp.src=m.image_hijab_url;hp.style.display='block';}else hp.style.display='none';$('mModal').style.display='grid';},
+      close(){$('mModal').style.display='none';},
+      async save(){
+        const body={name:$('m_name').value,ethnicity:$('m_eth').value,skin_tone:$('m_skin').value,poses:$('m_poses').value.split(',').map(s=>s.trim()).filter(Boolean),hijab:$('m_default_hijab').checked};
+        if(this.base)body.baseImage=this.base; if(this.hijab)body.hijabImage=this.hijab;
+        try{ if(this.editing)await jf('/api/admin/models/'+this.editing,{method:'PATCH',body:JSON.stringify(body)}); else await jf('/api/admin/models',{method:'POST',body:JSON.stringify(body)}); this.close();toast('تم الحفظ');this.load(); }catch(e){toast(e.message,true);}
+      },
+      async del(id){ if(!confirm('حذف العارضة؟'))return; await jf('/api/admin/models/'+id,{method:'DELETE'}); this.load(); },
+      openGen(){$('g_name').value='';$('g_eth').value='';$('g_skin').value='متوسط';$('g_default_hijab').checked=false;$('g_status').textContent='';$('gModal').style.display='grid';},
+      closeGen(){$('gModal').style.display='none';},
+      async generate(){
+        const name=$('g_name').value.trim(); if(!name)return toast('اكتبي الاسم',true);
+        $('g_btn').disabled=true; $('g_status').textContent='⏳ جاري توليد النسختين (عادية + حجاب)…';
+        try{
+          const r=await jf('/api/admin/models/generate',{method:'POST',body:JSON.stringify({name,ethnicity:$('g_eth').value,skin_tone:$('g_skin').value,hijab:$('g_default_hijab').checked})});
+          $('g_status').textContent = r.note ? ('✓ تم — '+r.note) : '✓ تم التوليد';
+          toast('تم توليد العارضة: '+name); this.load();
+          setTimeout(()=>this.closeGen(),1200);
+        }catch(e){$('g_status').textContent='';toast(e.message,true);}
+        finally{$('g_btn').disabled=false;}
+      },
+    };
+    $('m_base').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;Models.base=await fileToUrl(f);const p=$('m_basePv');p.src=Models.base;p.style.display='block';});
+    $('m_hijab').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;Models.hijab=await fileToUrl(f);const p=$('m_hijabPv');p.src=Models.hijab;p.style.display='block';});
+    window.Models=Models;
+    boot();
+  </script>
+</body>
+</html>

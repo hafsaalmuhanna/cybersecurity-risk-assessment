@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codera · تجربة لبس افتراضية بالذكاء الاصطناعي لمتاجر الملابس</title>
+  <link rel="stylesheet" href="/assets/codera.css" />
+  <style>
+    .nav { display:flex; align-items:center; justify-content:space-between; padding: 18px 0; }
+    .logo { display:flex; align-items:center; gap:10px; font-weight:900; font-size:20px; }
+    .logo .m { width:36px;height:36px;border-radius:10px;background:linear-gradient(180deg,var(--gold-2),var(--gold));color:#2a2113;display:grid;place-items:center;font-weight:900;}
+    .hero { text-align:center; padding: 60px 0 30px; }
+    .hero h1 { font-size: clamp(30px, 6vw, 54px); line-height:1.15; }
+    .hero p { font-size: 18px; color: var(--muted); max-width: 640px; margin: 12px auto 26px; }
+    .hero .cta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .showcase { display:grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap:14px; margin: 44px 0; }
+    .showcase img { width:100%; border-radius: 16px; border:1px solid var(--line); background:#171512; }
+    .features { display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin: 40px 0; }
+    .feat { padding: 22px; }
+    .feat .ico { width:44px;height:44px;border-radius:12px;background:var(--card-2);display:grid;place-items:center;font-size:22px;margin-bottom:12px;}
+    .pricing { display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin: 24px 0 60px; }
+    .price { padding: 24px; position:relative; }
+    .price.hot { border-color: var(--gold); }
+    .price .amt { font-size: 34px; font-weight:900; color: var(--gold-2); }
+    .price ul { list-style:none; padding:0; margin: 14px 0; }
+    .price li { padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+    .section-title { text-align:center; margin: 40px 0 8px; }
+    footer { border-top:1px solid var(--line); padding: 24px 0; color: var(--muted); text-align:center; }
+    .steps { display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin: 30px 0; }
+    .step .n { width:34px;height:34px;border-radius:50%;background:var(--card-2);border:1px solid var(--gold);color:var(--gold-2);display:grid;place-items:center;font-weight:800;margin-bottom:10px;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="logo"><span class="m">C</span> Codera</div>
+      <div class="row" style="display:flex;gap:10px">
+        <a class="btn ghost sm" href="/store?tenant=noor">متجر تجريبي</a>
+        <a class="btn sm" href="/dashboard">دخول التجّار</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="chip" style="margin-bottom:14px">منصّة وايت-ليبل · دومين خاص لكل متجر</div>
+      <h1>خلّي عميلاتك يجرّبن الملابس<br><span class="gold">قبل ما يشترن</span></h1>
+      <p>Codera يحوّل صورة القطعة إلى صورة احترافية لموديل يلبسها — بموديلات خاصة فيك، مع خيار الحجاب، أو على صورة العميلة نفسها. كل متجر يشتغل على دومينه الخاص، وأنت تبيعينه كاشتراك شهري.</p>
+      <div class="cta">
+        <a class="btn" href="/dashboard#register">ابدئي الآن</a>
+        <a class="btn ghost" href="/store?tenant=noor">شوفي مثال حي</a>
+      </div>
+    </section>
+
+    <div class="showcase" id="showcase"></div>
+
+    <h2 class="section-title">كيف تشتغل؟</h2>
+    <div class="steps">
+      <div class="card step" style="padding:20px"><div class="n">1</div><b>انقلي المتجر</b><p class="muted" style="font-size:14px">استوردي منتجات العميلة من شوبيفاي (API أو ملف CSV) بضغطة.</p></div>
+      <div class="card step" style="padding:20px"><div class="n">2</div><b>اختاري الموديلات</b><p class="muted" style="font-size:14px">فعّلي موديلات Codera المناسبة لجمهورها — مع أو بدون حجاب.</p></div>
+      <div class="card step" style="padding:20px"><div class="n">3</div><b>اربطي الدومين</b><p class="muted" style="font-size:14px">كل متجر يفتح على دومينه الخاص بدون اسم شركتك (white-label).</p></div>
+      <div class="card step" style="padding:20px"><div class="n">4</div><b>حصّلي اشتراك شهري</b><p class="muted" style="font-size:14px">باقات جاهزة بحصص توليد شهرية — الربح يتجمّع لك.</p></div>
+    </div>
+
+    <h2 class="section-title">مزايا المنصّة</h2>
+    <div class="features">
+      <div class="card feat"><div class="ico">🧥</div><b>تجربة لبس بالذكاء الاصطناعي</b><p class="muted">صورة القطعة → موديل يلبسها بجودة استوديو.</p></div>
+      <div class="card feat"><div class="ico">🧕</div><b>موديلات متنوعة + حجاب</b><p class="muted">بشرات وإثنيات مختلفة، وخيار الحجاب لجمهور الخليج.</p></div>
+      <div class="card feat"><div class="ico">📸</div><b>جرّبيها بصورتك</b><p class="muted">العميلة ترفع صورتها وتشوف القطعة عليها.</p></div>
+      <div class="card feat"><div class="ico">🌐</div><b>دومين خاص لكل متجر</b><p class="muted">وايت-ليبل كامل بدون ظهور اسم شركتك.</p></div>
+      <div class="card feat"><div class="ico">🛍️</div><b>استيراد من شوبيفاي</b><p class="muted">انقلي كتالوج أي عميلة بسهولة.</p></div>
+      <div class="card feat"><div class="ico">💳</div><b>اشتراكات شهرية</b><p class="muted">باقات وحصص وتتبّع استهلاك جاهز.</p></div>
+    </div>
+
+    <h2 class="section-title">الباقات</h2>
+    <p class="muted" style="text-align:center">أسعار للتجّار — عدّليها من لوحة التحكم.</p>
+    <div class="pricing" id="pricing"></div>
+  </div>
+  <footer>© Codera — منصّة تجربة اللبس الافتراضية · <a href="/dashboard">دخول التجّار</a> · <a href="/admin">لوحة المنصّة</a></footer>
+
+  <script>
+    // model showcase from seeded house models
+    fetch('/api/store?tenant=noor').then(r=>r.json()).then(d=>{
+      const s=document.getElementById('showcase');
+      (d.models||[]).slice(0,5).forEach(m=>{ const i=document.createElement('img'); i.src=m.image_url; i.alt=m.name; s.appendChild(i); });
+    }).catch(()=>{});
+    fetch('/api/plans').then(r=>r.json()).then(d=>{
+      const el=document.getElementById('pricing');
+      (d.plans||[]).forEach((p,idx)=>{
+        el.innerHTML += `<div class="card price ${idx===1?'hot':''}">${idx===1?'<div class="chip on" style="position:absolute;top:-12px;inset-inline-start:20px">الأكثر طلباً</div>':''}
+          <b style="font-size:18px">${p.name}</b>
+          <div class="amt">${p.price} <span style="font-size:14px;color:var(--muted)">${p.currency}/شهر</span></div>
+          <ul>${p.features.map(f=>`<li>✦ ${f}</li>`).join('')}
+            <li>${p.quota_month} توليد/شهر</li></ul>
+          <a class="btn block" href="/dashboard#register">اختيار</a></div>`;
+      });
+    }).catch(()=>{});
+  </script>
+</body>
+</html>
