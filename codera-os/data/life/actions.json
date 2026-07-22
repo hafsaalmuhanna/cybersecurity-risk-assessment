@@ -1,0 +1,7 @@
+[
+  { "id": "a1", "area": "business", "title": "Price the workshops you already give for free", "provide": "A one-page paid-workshop offer with a clear price", "priority": "high", "status": "todo", "due": "2026-07-15" },
+  { "id": "a2", "area": "business", "title": "List the 5 warmest people from past free sessions", "provide": "Names, contact, and what each one needs", "priority": "high", "status": "todo", "due": "2026-07-12" },
+  { "id": "a3", "area": "finance", "title": "Set your monthly income target = rent (KD 280)", "provide": "The first number to hit before drawing salary", "priority": "med", "status": "todo", "due": "2026-07-20" },
+  { "id": "a4", "area": "finance", "title": "Separate personal vs company spending", "provide": "A simple rule for owner drawings", "priority": "med", "status": "todo", "due": "2026-07-31" },
+  { "id": "a5", "area": "personal", "title": "Brain-dump everything on your mind into Capture", "provide": "A clear head so priorities become obvious", "priority": "low", "status": "todo", "due": null }
+]

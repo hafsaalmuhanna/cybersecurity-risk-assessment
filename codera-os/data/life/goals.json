@@ -1,0 +1,8 @@
+[
+  { "id": "g1", "area": "finance", "title": "Reach operating break-even — KD 280/mo income", "titleAr": "الوصول لنقطة التعادل — دخل ٢٨٠ د.ك/شهر", "progress": 3, "target": 100, "unit": "%", "due": "2026-10-01" },
+  { "id": "g2", "area": "finance", "title": "Start drawing your KD 300/mo salary", "titleAr": "بدء سحب راتبك ٣٠٠ د.ك/شهر", "progress": 0, "target": 100, "unit": "%", "due": "2026-12-31" },
+  { "id": "g3", "area": "finance", "title": "Recover invested capital — KD 12,160", "titleAr": "استرجاع رأس المال — ١٢٬١٦٠ د.ك", "progress": 1, "target": 100, "unit": "%", "due": "2027-12-31" },
+  { "id": "g4", "area": "business", "title": "Convert 3 free workshops into paid clients", "titleAr": "تحويل ٣ ورش مجانية إلى عملاء مدفوعين", "progress": 0, "target": 3, "unit": "clients", "due": "2026-09-01" },
+  { "id": "g5", "area": "business", "title": "Publish Codera service pricing publicly", "titleAr": "نشر أسعار خدمات كوديرا للعلن", "progress": 30, "target": 100, "unit": "%", "due": "2026-08-01" },
+  { "id": "g6", "area": "growth", "title": "Finish one advanced skill (edit me)", "titleAr": "إنهاء مهارة متقدمة (عدّليني)", "progress": 0, "target": 100, "unit": "%", "due": "2026-12-31" }
+]

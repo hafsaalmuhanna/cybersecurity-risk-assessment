@@ -22,6 +22,25 @@ sheet for it — no code changes. Grow from 12 to 50 services without re-enginee
   content plan → articles → measurement → monthly report).
 - **Bilingual.** English/Arabic toggle (top-right `ع` / `EN`) with full RTL.
 
+## CEO Dashboard (Life OS)
+
+`ceo.html` is a companion command center for running your whole life like a
+company — reachable from the Business OS via the **🎛️ CEO** button (and back
+via **🏢 Business OS**). It captures what's in your head, tells you what to do
+next, and records/analyzes/gives insight across every life area.
+
+- **Capture** — a quick-add inbox for any thought; triage each into a follow-up.
+- **Follow-ups** — what to do *and what to provide/deliver*, by area and priority.
+- **Goals & Habits** — progress steppers and a weekly habit tracker.
+- **Life areas** — Business, Finance, Health, Growth, Relationships, Faith, Personal;
+  each with a score, goals, actions, habits, and insights. Add an area in
+  `data/life/areas.json` and it appears automatically.
+- **Insights** — rule-based observations that pull from your real Codera
+  financials (break-even, capital recovery) plus your inbox, due dates, and habits.
+
+Everything you add or tick is **saved in your browser** (localStorage), seeded
+from `data/life/*.json`. Use *Reset to sample data* to start over.
+
 ## Run it
 
 No build tooling required to view — everything compiles into a single embedded

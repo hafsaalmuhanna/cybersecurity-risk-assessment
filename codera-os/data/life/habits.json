@@ -1,0 +1,6 @@
+[
+  { "id": "h1", "area": "faith", "title": "Daily reset / reflection (10 min)", "titleAr": "إعادة ضبط يومية / تأمل (١٠ د)", "perWeek": 7, "done": 0 },
+  { "id": "h2", "area": "health", "title": "Move for 30 minutes", "titleAr": "حركة ٣٠ دقيقة", "perWeek": 5, "done": 0 },
+  { "id": "h3", "area": "business", "title": "One outreach message to a lead", "titleAr": "رسالة تواصل واحدة لعميل محتمل", "perWeek": 5, "done": 0 },
+  { "id": "h4", "area": "growth", "title": "Learn for 20 minutes", "titleAr": "تعلّم ٢٠ دقيقة", "perWeek": 5, "done": 0 }
+]

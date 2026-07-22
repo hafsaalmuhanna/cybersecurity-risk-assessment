@@ -85,6 +85,18 @@ const data = {
   financials: existsSync(join(DATA, "financials.json"))
     ? readJSON(join(DATA, "financials.json"))
     : null,
+  life: (() => {
+    const L = join(DATA, "life");
+    if (!isDir(L)) return null;
+    const read = (f) => (existsSync(join(L, f)) ? readJSON(join(L, f)) : []);
+    return {
+      areas: read("areas.json"),
+      goals: read("goals.json"),
+      actions: read("actions.json"),
+      captures: read("captures.json"),
+      habits: read("habits.json"),
+    };
+  })(),
 };
 
 // Pre-compute the owner's total personal outlay so the UI stays simple.

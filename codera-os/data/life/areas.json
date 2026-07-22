@@ -1,0 +1,9 @@
+[
+  { "id": "business", "name": "Business — Codera", "nameAr": "العمل — كوديرا", "icon": "🏢", "color": "#4f8cff", "focus": "Turn free work into paid clients", "focusAr": "حوّلي الشغل المجاني إلى عملاء مدفوعين", "score": 55 },
+  { "id": "finance", "name": "Finance", "nameAr": "المالية", "icon": "💰", "color": "#22c55e", "focus": "Reach break-even (KD 280/mo)", "focusAr": "الوصول لنقطة التعادل (٢٨٠ د.ك/شهر)", "score": 35 },
+  { "id": "health", "name": "Health & Energy", "nameAr": "الصحة والطاقة", "icon": "🧘", "color": "#06b6d4", "focus": "Protect your energy while building", "focusAr": "احمي طاقتك أثناء البناء", "score": 50 },
+  { "id": "growth", "name": "Growth & Learning", "nameAr": "التطور والتعلم", "icon": "📚", "color": "#8b5cf6", "focus": "Sharpen one high-value skill", "focusAr": "أتقني مهارة واحدة عالية القيمة", "score": 60 },
+  { "id": "relationships", "name": "Relationships & Network", "nameAr": "العلاقات والشبكة", "icon": "🤝", "color": "#f59e0b", "focus": "Nurture people who open doors", "focusAr": "اهتمي بالعلاقات التي تفتح أبواباً", "score": 50 },
+  { "id": "faith", "name": "Faith & Balance", "nameAr": "الإيمان والتوازن", "icon": "🌙", "color": "#14b8a6", "focus": "Keep steady daily anchors", "focusAr": "ثوابت يومية تمنحك التوازن", "score": 65 },
+  { "id": "personal", "name": "Personal & Home", "nameAr": "الذات والبيت", "icon": "🏡", "color": "#ec4899", "focus": "Build systems for a calmer week", "focusAr": "أنظمة لأسبوع أهدأ", "score": 55 }
+]
