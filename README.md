@@ -1,31 +1,90 @@
-# Cybersecurity Risk Assessment
+# موقع التسجيل في حلقة تحفيظ القرآن الكريم 🕌
 
-## Project Introduction
-This project demonstrates a practical cybersecurity risk assessment for a fictional organization. The goal is to identify critical assets, analyze potential threats and vulnerabilities, and evaluate risks that could impact confidentiality, integrity, and availability.
+موقع تسجيل للحلقة النسائية لتحفيظ القرآن الكريم — **بإدارة حفصة المهنا**.
 
-## Scope and Assets
-- User accounts and credentials
-- Internal network systems
-- Customer data (PII)
-- Business-critical applications
+يتيح الموقع للمشتركات تعبئة استمارة التسجيل، ويحفظ البيانات في قاعدة بيانات،
+مع لوحة إدارة لعرض المشتركات وتصدير بياناتهنّ إلى **Excel** وإرسال رسائل لهنّ
+بمواعيد الحلقة (الأيام والأوقات) عبر واتساب.
 
-## Risk Analysis
-The assessment focuses on:
-- Identifying threats such as phishing, malware, and unauthorized access
-- Evaluating vulnerabilities including weak passwords and misconfigured systems
-- Assessing likelihood and potential impact of each risk
+---
 
-## Risk Evaluation
-Risks are categorized as low, medium, or high based on:
-- Asset value
-- Threat likelihood
-- Potential business impact
+## المميزات
 
-## Mitigation Recommendations
-- Implement strong identity and access management controls
-- Enforce multi-factor authentication (MFA)
-- Conduct regular security awareness training
-- Perform routine security audits and vulnerability assessments
+- ✅ **استمارة تسجيل عربية** كاملة (RTL) بكل الحقول المطلوبة (البيانات الشخصية، معلومات الحفظ، معلومات إضافية).
+- ✅ **قاعدة بيانات** مدمجة (SQLite) تحفظ كل التسجيلات بشكل دائم.
+- ✅ **لوحة إدارة محمية بكلمة مرور** لعرض وإدارة المشتركات (بحث، تغيير الحالة، حذف، تفاصيل كاملة).
+- ✅ **تصدير إلى Excel** — تنزيل ملف `.xlsx` جاهز بكل البيانات بلمسة زر.
+- ✅ **إرسال الرسائل** للمشتركات بمواعيد الحلقة (الأيام والأوقات) عبر روابط واتساب جاهزة لكل مشتركة، مع سجل للرسائل.
+- ✅ **إحصائيات سريعة** لعدد المشتركات وتوزّعهنّ حسب المستوى.
 
-## Conclusion and Next Steps
-This assessment highlights the importance of proactive risk management. Future work could include automating risk scoring, integrating real vulnerability scan data, and aligning controls with frameworks such as NIST CSF.
+---
+
+## التشغيل
+
+المتطلبات: **Node.js نسخة 22.5 أو أحدث** (يستخدم قاعدة SQLite المدمجة في Node).
+
+```bash
+# 1) تثبيت الحزم
+npm install
+
+# 2) تشغيل الخادم
+npm start
+```
+
+ثم افتحي المتصفح على:
+
+- صفحة التسجيل (للمشتركات): <http://localhost:3000/>
+- لوحة الإدارة (لحفصة): <http://localhost:3000/admin>
+
+### كلمة مرور لوحة الإدارة
+
+كلمة المرور الافتراضية هي: `hafsa2026`
+
+يُفضّل تغييرها عند التشغيل عبر متغيّر بيئة:
+
+```bash
+ADMIN_PASSWORD="كلمة-المرور-الجديدة" PORT=3000 npm start
+```
+
+متغيّرات البيئة المتاحة:
+
+| المتغيّر | الوصف | الافتراضي |
+| --- | --- | --- |
+| `PORT` | منفذ الخادم | `3000` |
+| `ADMIN_PASSWORD` | كلمة مرور لوحة الإدارة | `hafsa2026` |
+| `TOKEN_SECRET` | سرّ توقيع جلسات الدخول | يُولَّد تلقائيًا |
+
+---
+
+## كيفية الاستخدام
+
+1. **التسجيل**: تفتح المشتركة الصفحة الرئيسية، تعبّئ الاستمارة، وترسلها.
+2. **المتابعة**: تدخل حفصة إلى `/admin`، فترى جميع الطلبات، تبحث فيها، وتغيّر حالة كل طلب (جديدة / مقبولة / بانتظار / معتذرة).
+3. **التصدير**: بضغطة "تصدير إلى Excel" يُنزَّل ملف بكل بيانات المشتركات لاستخدامه أو حفظه.
+4. **التواصل والرسائل**: من تبويب "الرسائل" تكتب حفصة الرسالة وتحدّد الأيام والأوقات والفئة المستهدفة (الكل أو حسب المستوى)، فيتولّد لكل مشتركة رابط واتساب جاهز للإرسال، وتُحفظ الرسالة في السجل.
+
+---
+
+## بنية المشروع
+
+```
+├── server.js          # خادم Express + واجهات الـ API
+├── db.js              # إعداد قاعدة البيانات (SQLite)
+├── data/              # ملف قاعدة البيانات (يُنشأ تلقائيًا)
+└── public/
+    ├── index.html     # استمارة التسجيل
+    ├── app.js         # منطق الاستمارة
+    ├── admin.html     # لوحة الإدارة
+    ├── admin.js       # منطق لوحة الإدارة
+    ├── admin.css      # تنسيقات اللوحة
+    └── styles.css     # التنسيقات العامة
+```
+
+---
+
+## ملاحظات
+
+- ملف قاعدة البيانات يُحفظ في `data/registrations.db` — احرصي على أخذ نسخة احتياطية منه بشكل دوري.
+- إرسال الرسائل يتم عبر **واتساب** (روابط `wa.me`)، وهو مجاني ولا يحتاج اشتراكات؛ يكفي الضغط على "إرسال" أمام كل اسم.
+
+> ﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾

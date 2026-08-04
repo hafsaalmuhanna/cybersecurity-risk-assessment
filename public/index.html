@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>التسجيل في حلقة تحفيظ القرآن الكريم — بإدارة حفصة المهنا</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <span class="badge">حلقة نسائية</span>
+    <h1>حلقة تحفيظ القرآن الكريم</h1>
+    <p class="sub">استمارة التسجيل</p>
+    <p class="admin-slogan">بإدارة: حفصة المهنا</p>
+  </header>
+
+  <main class="container">
+    <div class="greeting">
+      <p class="salam">السلام عليكم ورحمة الله وبركاته</p>
+      <p>يسرّنا استقبال طلبات التسجيل في حلقة تحفيظ القرآن الكريم.</p>
+      <p>يرجى تعبئة البيانات التالية بدقة لإتمام عملية التسجيل.</p>
+    </div>
+
+    <div class="card" id="formCard">
+      <div id="errorBox" class="alert alert-error hidden"></div>
+
+      <form id="regForm" novalidate>
+        <h2 class="section-title">البيانات الشخصية</h2>
+        <div class="grid">
+          <div class="field full">
+            <label for="full_name">١. الاسم الكامل <span class="req">*</span></label>
+            <input type="text" id="full_name" name="full_name" required />
+          </div>
+          <div class="field">
+            <label for="age">٢. العمر</label>
+            <input type="number" id="age" name="age" min="1" max="120" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for="civil_id">٣. الرقم المدني</label>
+            <input type="text" id="civil_id" name="civil_id" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for="phone">٤. رقم الهاتف <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" required placeholder="مثال: 5xxxxxxx" inputmode="tel" />
+          </div>
+          <div class="field full">
+            <label for="address">٥. عنوان السكن</label>
+            <input type="text" id="address" name="address" />
+          </div>
+        </div>
+
+        <h2 class="section-title">معلومات الحفظ</h2>
+        <div class="grid">
+          <div class="field">
+            <label for="memorized_count">٦. عدد الأجزاء المحفوظة حاليًا</label>
+            <input type="number" id="memorized_count" name="memorized_count" min="0" max="30" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for="target_parts">٨. الأجزاء المراد الاشتراك فيها</label>
+            <input type="text" id="target_parts" name="target_parts" placeholder="مثال: جزء عمّ، الجزء الأول..." />
+          </div>
+          <div class="field full">
+            <label for="memorized_surahs">٧. السور أو الأجزاء التي تم حفظها</label>
+            <textarea id="memorized_surahs" name="memorized_surahs"></textarea>
+          </div>
+          <div class="field full">
+            <label>٩. هل سبق لكِ الالتحاق بحلقة تحفيظ قرآن؟</label>
+            <div class="radio-row">
+              <label><input type="radio" name="previous_circle" value="نعم" /> نعم</label>
+              <label><input type="radio" name="previous_circle" value="لا" /> لا</label>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-title">معلومات إضافية</h2>
+        <div class="grid">
+          <div class="field full">
+            <label>١٠. المستوى الحالي في التلاوة</label>
+            <div class="radio-row">
+              <label><input type="radio" name="recitation_level" value="مبتدئ" /> مبتدئ</label>
+              <label><input type="radio" name="recitation_level" value="متوسط" /> متوسط</label>
+              <label><input type="radio" name="recitation_level" value="متقدم" /> متقدم</label>
+            </div>
+          </div>
+          <div class="field full">
+            <label for="suitable_times">١١. الأوقات المناسبة للحضور</label>
+            <input type="text" id="suitable_times" name="suitable_times" placeholder="مثال: بعد العصر، السبت والاثنين..." />
+          </div>
+          <div class="field full">
+            <label for="notes">١٢. ملاحظات أو احتياجات خاصة</label>
+            <textarea id="notes" name="notes"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">إرسال طلب التسجيل</button>
+        <p class="note" style="text-align:center; margin-top:12px;">
+          الحقول المميزة بـ <span class="req">*</span> إلزامية.
+        </p>
+      </form>
+    </div>
+
+    <div class="card success hidden" id="successCard">
+      <div class="check">✓</div>
+      <h2>تم استلام طلبكِ بنجاح</h2>
+      <p>نشكركم على التسجيل، ونسأل الله أن يجعل القرآن نورًا في قلوبكم.</p>
+      <p class="note">سيتم التواصل معكِ لتأكيد موعد الحضور بإذن الله.</p>
+      <button class="btn btn-ghost" onclick="location.reload()" style="margin-top:18px;">تسجيل طلب جديد</button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p class="duaa">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾</p>
+    <p>حلقة تحفيظ القرآن الكريم — بإدارة حفصة المهنا</p>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

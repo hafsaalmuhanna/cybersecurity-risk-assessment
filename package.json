@@ -1,0 +1,24 @@
+{
+  "name": "quran-circle-registration",
+  "version": "1.0.0",
+  "description": "موقع التسجيل في حلقة تحفيظ القرآن الكريم النسائية - بإدارة حفصة المهنا",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node --no-warnings server.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:41729/git/hafsaalmuhanna/cybersecurity-risk-assessment"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1"
+  }
+}
